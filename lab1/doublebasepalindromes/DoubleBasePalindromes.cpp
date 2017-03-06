@@ -13,9 +13,9 @@ string DecToBin(int number)
     if ( number == 1 ) return "1";
 
     if ( number % 2 == 0 )
-        return DecToBin(number /2) + "0";
+        return DecToBin(number / 2) + "0";
     else
-        return DecToBin(number /2) + "1";
+        return DecToBin(number / 2) + "1";
 }
 
 
