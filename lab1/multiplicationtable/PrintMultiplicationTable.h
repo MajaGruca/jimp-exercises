@@ -1,0 +1,12 @@
+//
+// Created by Paulina Kapłon on 06.03.2017.
+//
+
+#ifndef JIMP_EXERCISES_PRINTMULTIPLICATIONTABLE_H
+#define JIMP_EXERCISES_PRINTMULTIPLICATIONTABLE_H
+
+
+void PrintMultiplicationTable(int tab[][10]);
+
+
+#endif //JIMP_EXERCISES_PRINTMULTIPLICATIONTABLE_H
