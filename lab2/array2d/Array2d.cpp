@@ -8,7 +8,7 @@ using namespace std;
 
 void DeleteArray2D(int **array, int n_rows, int n_columns)
 {
-    for ( int i(0); i < n_rows; ++i )
+    for ( int i(0); i < n_rows; ++i)
         delete [] array[i];
     delete [] array;
     array = NULL;
