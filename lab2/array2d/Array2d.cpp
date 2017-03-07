@@ -10,7 +10,7 @@ void DeleteArray2D(int **array, int n_rows, int n_columns)
 {
     for ( int i(0); i < n_rows; ++i )
         delete [] array[i];
-    delete [] array ;
+    delete [] array;
     array = NULL;
 }
 void  PrintArray2D(int **array,int n_rows, int n_columns)
