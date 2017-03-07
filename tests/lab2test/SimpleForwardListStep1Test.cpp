@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <MemLeakTest.h>
-#include <SimpleForwardList.h>
+#include <ForwardList.h>
 
 class SimpleForwardListStep1Tests : public ::testing::Test, MemLeakTest {};
 

@@ -5,7 +5,11 @@
 #ifndef JIMP_EXERCISES_FORWARDLIST_H
 #define JIMP_EXERCISES_FORWARDLIST_H
 
-struct ForwardList;
+struct ForwardList
+{
+    int value;
+    ForwardList *next;
+};
 
 ForwardList *CreateNode(int value);
 void DestroyList(ForwardList *list);

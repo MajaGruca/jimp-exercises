@@ -5,28 +5,28 @@
 #include <iostream>
 using namespace std;
 
-struct ForwardList
-{
-    int value;
-    ForwardList *next;
-};
+
 
 ForwardList *CreateNode(int value)
 {
     ForwardList *node = new ForwardList;
     node->value = value;
-    node->next = 0;
+    node->next = nullptr;
     return node;
 }
 
 ForwardList *PushFront(ForwardList *list, int value)
 {
-    ForwardList *node = CreateNode(value);
-    if(list!=0)
+
+    if(list!=nullptr)
     {
+        ForwardList *node = CreateNode(value);
         node->next = list;
+        return node;
     }
-    return node;
+    else {
+        return nullptr;
+    }
 }
 
 void Append(ForwardList *list, ForwardList *tail)
@@ -37,7 +37,7 @@ void Append(ForwardList *list, ForwardList *tail)
         wsk = wsk->next;
     }
     wsk->next = tail;
-    tail->next = 0;
+    tail->next = nullptr;
 }
 
 void DestroyList(ForwardList *list)
