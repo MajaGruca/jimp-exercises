@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "Array2d.h"
+#include "Array2D.h"
 using namespace std;
 
 int main() {

@@ -1,6 +1,6 @@
 project(lab2)
 
-add_subdirectory_if_exists(array2d)
+add_subdirectory_if_exists(array2D)
 add_subdirectory_if_exists(polybius)
 add_subdirectory_if_exists(greatestproduct)
 add_subdirectory_if_exists(simpleforwardlist)

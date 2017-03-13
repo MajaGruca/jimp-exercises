@@ -2,7 +2,7 @@
 // Created by ktr on 07.03.2017.
 //
 
-#include "Array2d.h"
+#include "Array2D.h"
 #include <iostream>
 using namespace std;
 
