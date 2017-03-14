@@ -31,13 +31,22 @@ ForwardList *PushFront(ForwardList *list, int value)
 
 void Append(ForwardList *list, ForwardList *tail)
 {
-    ForwardList *wsk = list;
-    while(wsk->next)
+    if(tail!=nullptr)
     {
-        wsk = wsk->next;
+        if(list!=nullptr)
+        {
+            ForwardList *wsk = list;
+            while (wsk->next) {
+                wsk = wsk->next;
+            }
+            wsk->next = tail;
+            tail->next = nullptr;
+        }
+        else
+        {
+            list = tail;
+        }
     }
-    wsk->next = tail;
-    tail->next = nullptr;
 }
 
 void DestroyList(ForwardList *list)
