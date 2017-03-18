@@ -13,10 +13,7 @@
 namespace tinyurl{
     struct TinyUrlCodec{
         std::map<std::string, std::string> url_map;
-        //std::string url_decoded;
-        //std::string url_encoded;
-        //std::string hash;
-        std::array<char, 6> *current_hash;
+        std::array<char, 6> current_hash;
     };
 
     std::unique_ptr<TinyUrlCodec> Init();
