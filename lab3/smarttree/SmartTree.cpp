@@ -57,31 +57,25 @@ namespace datastructures{
         {
             PrintTreeInOrder( unique_ptr->right,out);
         }
-
-    }
-    void AddString(const std::unique_ptr<SmartTree> &tree, std::ostream *str)
-    {
-        *str << " [" << tree->value ;
-        if(tree->left!= nullptr)
-            AddString(tree->left,str);
-
-        if(tree->right!= nullptr)
-            AddString(tree->right,str);
-
-        if(tree->left== nullptr)
-            *str << " [none]";
-
-        if(tree->right== nullptr)
-            *str << " [none]";
-
-        *str<<"]";
     }
     std::string DumpTree(const std::unique_ptr<SmartTree> &tree)
     {
-        std::stringstream ss;
-        AddString(tree, &ss);
+        std::string str;
 
-        return  ss.str().erase(0,1);
+        str += "["+std::to_string(tree->value)+" ";
+        if(tree->left!= nullptr)
+            str+=DumpTree(tree->left);
+        else
+            str+= "[none]";
+
+        str+=" ";
+
+        if(tree->right!= nullptr)
+            str+=DumpTree(tree->right);
+        else
+            str+= "[none]";
+        str+="]";
+        return str;
     }
     std::unique_ptr <SmartTree> RestoreTree(const std::string &tree);
 
