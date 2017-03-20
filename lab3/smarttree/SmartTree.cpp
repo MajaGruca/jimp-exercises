@@ -3,7 +3,7 @@
 //
 
 #include "SmartTree.h"
-#include <iostream>
+
 #include <sstream>
 #include <string>
 #include <memory>
@@ -16,8 +16,6 @@ namespace datastructures{
         leaf->value=value;
         leaf->left= nullptr;
         leaf->right= nullptr;
-
-
         return leaf;
     }
     std::unique_ptr <SmartTree> InsertLeftChild(std::unique_ptr<SmartTree> tree, std::unique_ptr<SmartTree> left_subtree)
@@ -77,6 +75,50 @@ namespace datastructures{
         str+="]";
         return str;
     }
-    std::unique_ptr <SmartTree> RestoreTree(const std::string &tree);
+    std::unique_ptr <SmartTree> RestoreTree(const std::string &tree)
+    {
+        std::string temp,value;
+        int it_value=0;
+        temp=tree.substr(1,tree.length()-2);
+        while (isdigit(temp[it_value]) || temp[it_value]=='-')
+        {
+            value+=temp[it_value];
+            it_value++;
+        }
+        if(value!="")
+        {
+            std::string left,right;
+            int it_left=-1,iter=0,l=0;
+
+            while(temp[iter]!='\0' && it_left!=0)
+            {
+                if(temp[iter]=='[')
+                {
+                    if(it_left<0)
+                        it_left=1;
+                    else
+                        it_left++;
+                    if(l==0)
+                        l=iter;
+                }
+                else
+                {
+                    if (temp[iter] == ']')
+                        it_left--;
+                }
+                iter++;
+            }
+
+            left=temp.substr(l,iter-value.length()-1);
+            right=temp.substr(iter+1,temp.length()-iter);
+
+            auto root = CreateLeaf(std::atoi(value.c_str()));
+            root->left = RestoreTree(left);
+            root->right = RestoreTree(right);
+            return root;
+        }
+        else
+            return nullptr;
+    }
 
 }
