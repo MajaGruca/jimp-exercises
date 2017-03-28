@@ -17,7 +17,8 @@ namespace memorychunk
 
     MemoryChunk::MemoryChunk(const MemoryChunk& memorychunk) {
         ptr = new int8_t[memorychunk.siz];
-        ptr = memorychunk.ptr;
+        std::copy(ptr,memorychunk.ptr);
+        std::copy(siz,memorychunk.siz);
     }
 
     MemoryChunk & MemoryChunk::operator=(const MemoryChunk& memorychunk) {
@@ -32,7 +33,7 @@ namespace memorychunk
         siz=memorychunk.siz;
     }
 
-    MemoryChunk::MemoryChunk(MemoryChunk &&xxx) : ptr{nullptr} {
+    MemoryChunk::MemoryChunk(MemoryChunk &&xxx) : ptr{nullptr}, siz{0} {
         std::swap(ptr,xxx.ptr);
         std::swap(siz,xxx.siz);
     }
