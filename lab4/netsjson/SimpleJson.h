@@ -14,6 +14,7 @@ namespace nets{
 
     class JsonValue{
     public:
+
         JsonValue(int a);
         JsonValue(double a);
         JsonValue(std::string a);
@@ -22,6 +23,7 @@ namespace nets{
         JsonValue(std::map<std::string,JsonValue> a);
         //~JsonValue();
         std::string ToString() const;
+        void GetBoo() const;
         std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;
     private:
         int int_;

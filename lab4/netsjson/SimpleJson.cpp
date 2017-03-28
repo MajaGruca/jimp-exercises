@@ -4,6 +4,7 @@
 #include "SimpleJson.h"
 namespace nets {
 
+
     JsonValue::JsonValue(int a) {
         int_ = a;
         constructor = 1;
@@ -20,10 +21,18 @@ namespace nets {
     }
 
     JsonValue::JsonValue(std::string a){
-        for(int i=0;i<a.size();i++)
+       /* for(int i=0;i<a.size();i++)
         {
             str_.push_back(a[i]);
+        }*/
+        std::string cos = a;
+        for (int i=0; i < cos.length(); i++){
+            if (cos[i]=='\"' || cos[i]=='\\'){
+                cos.insert(i, 1,'\\');
+                i++;
+            }
         }
+        str_=a;
         constructor = 4;
     }
 
@@ -53,16 +62,18 @@ namespace nets {
             }
 
             case 3:
-                if (boo_ == true)
+                if (boo_ )//== true)
                     return "true";
                 else
                     return "false";
             case 4: {
                 std::string temp;
-                for (auto n: str_) {
-                    temp.push_back(n);
-                    }
-                return temp;
+                //for (auto n: str_) {
+                 //   temp.push_back(n);
+                 //   }
+
+                return "\"" + str_ + "\"";
+                //return temp;
                 }
             case 5: {
                 std::string temp="[";
@@ -76,11 +87,25 @@ namespace nets {
                 return temp;
             }
             case 6: {
-                std::string temp;
-                for (auto n: map_) {
+                /*std::string temp;
+                for (auto &n: this->map_) {
                     temp.append(n.second.ToString());
                 }
-                return temp;
+                return temp;*/
+                std::string data = "{";
+                for (auto &n : this->map_) {
+                    std::string cos = n.first;
+                    for (int i=0;i<cos.length();i++){
+                        if (cos[i]=='\"' || cos[i]=='\\'){
+                            cos.insert(i, 1,'\\');
+                            i++;
+                        }
+                    }
+                    data = data+"\""+cos+"\": "+n.second.ToString()+", ";
+                }
+                data[data.size()-2]='}';
+                data.pop_back();
+                return data;
             }
             default:
                 break;
@@ -91,10 +116,11 @@ namespace nets {
 
             for (auto &n: map_) {
                 if (n.first == name)
-                    return std::experimental::make_optional(map_.at(name));
-                else
-                    return {};
+                    return n.second;//std::experimental::make_optional(map_.at(name));
+                //else
+                  //  return {};
             }
+
             //if(map_.at(name)) {
             // std::experimental::optional<JsonValue> temp = map_.at(name).ToString();
             // return temp;
