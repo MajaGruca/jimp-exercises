@@ -24,27 +24,39 @@ namespace nets
 
     std::string View::Render(const std::unordered_map <std::string, std::string> &model) const
     {
-        std::string regex_str="";
         std::string str=GetStr();
-        std::string temp;
+        std::string temp=str;
         std::smatch matching_substring;
-        for (auto n : model)
+        std::string key,regex_key,result;
+        while (std::regex_search (temp,matching_substring,std::regex("\\{\\{[A-Za-z0-9_]+\\}\\}")))
+
         {
-            regex_str= "\\{\\{"+n.first +"\\}\\}";
-            temp=str;
-            while (std::regex_search (temp,matching_substring,std::regex(regex_str)))
+            for (auto x:matching_substring) {key=x;}
+            key.erase (0,2);
+            key.erase (key.length()-2,2);
+            auto it = model.find(key);
+            regex_key="\\{\\{"+key+"\\}\\}";
+            if (it != model.end())
             {
-                temp = matching_substring.suffix().str();
-                str=std::regex_replace(str,std::regex(regex_str),n.second);
+                str=std::regex_replace(temp,std::regex(regex_key),it->second);
+                result=result+str;
+                temp =matching_substring.suffix().str();
+                temp=std::regex_replace(temp,std::regex(regex_key),it->second);
+
             }
+            else
+            {
+                str=std::regex_replace(temp,std::regex(regex_key),"");
+                result=result+str;
+                temp =matching_substring.suffix().str();
+
+            }
+
+            if(result.length())
+                result=result.erase(result.length()-temp.length(),temp.length());
+
         }
-        temp=str;
-        regex_str="\\{\\{[A-Za-z0-9_]+\\}\\}";
-        while (std::regex_search (temp,matching_substring,std::regex(regex_str)))
-        {
-            temp = matching_substring.suffix().str();
-            str=std::regex_replace(str,std::regex(regex_str),"");
-        }
-        return str;
+        result=result+temp;
+        return result;
     }
 }
