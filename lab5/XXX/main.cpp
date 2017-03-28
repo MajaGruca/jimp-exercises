@@ -2,6 +2,7 @@
 // Created by ktr on 28.03.2017.
 //
 #include "XXX.h"
+
 int copymain() {
     //Konstrukcja obiektu za pomocą domyślnego konstruktora
     //nieciekawe

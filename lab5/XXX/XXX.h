@@ -30,6 +30,9 @@ public:
     XXX &operator=(XXX &&xxx);
     //5. Destruktor
     ~XXX();
+
+private:
+    char *name_ ;
 };
 
 #endif //JIMP_EXERCISES_XXX_H
