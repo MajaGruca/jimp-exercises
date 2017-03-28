@@ -9,8 +9,13 @@
 #include <iostream>
 #include "vector"
 #include "map"
-using ::std::literals::string_literals::operator""s;
 namespace nets{
+
+    enum SupportedType{
+        INT,
+        DOUBLE,
+        BOOL
+    };
 
     class JsonValue{
     public:
@@ -21,7 +26,7 @@ namespace nets{
         JsonValue(bool a);
         JsonValue(std::vector<JsonValue> a);
         JsonValue(std::map<std::string,JsonValue> a);
-        //~JsonValue();
+        ~JsonValue();
         std::string ToString() const;
         void GetBoo() const;
         std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;

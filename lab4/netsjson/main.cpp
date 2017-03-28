@@ -13,10 +13,10 @@ using ::std::cout;
 using ::std::endl;
 using ::std::string;
 using ::nets::JsonValue;
-using ::std::literals::string_literals::operator""s;
+using ::std::literals::operator""s;
 
 int main() {
-/*
+
     vector<JsonValue> js {JsonValue{56.6},JsonValue{45},JsonValue{"abc"s}};
     map<string, JsonValue> obj_v ={{"values",JsonValue{js}},{"name",JsonValue{"Test name"}},{"age",JsonValue{13}}};
     JsonValue obj {obj_v};
@@ -31,6 +31,6 @@ int main() {
         cout << "is present" << endl;
     } else {
         cout << "is absent" << endl;
-    }*/
+    }
     return 0;
 }

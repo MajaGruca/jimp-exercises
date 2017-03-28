@@ -2,6 +2,7 @@
 // Created by maj3 on 27.03.17.
 //
 #include "SimpleJson.h"
+#include <regex>
 namespace nets {
 
 
@@ -18,6 +19,10 @@ namespace nets {
     JsonValue::JsonValue(bool a) {
         boo_ = a;
         constructor = 3;
+    }
+    JsonValue::~JsonValue(){
+        map_.clear();
+
     }
 
     JsonValue::JsonValue(std::string a){
@@ -67,12 +72,37 @@ namespace nets {
                 else
                     return "false";
             case 4: {
-                std::string temp;
+                //std::smatch matching_substring;
+                //std::string temp=str_,pom=temp;
                 //for (auto n: str_) {
                  //   temp.push_back(n);
                  //   }
+                std::string ret = "\"";
+               for(int i =0;i<str_.length();i++)
+               {
+                   /*if(temp[i]=='\\')
+                   {
+                       temp.insert(i,"\\\\");
+                       i++;
+                   }
+                   if(temp[i]=='\"')
+                   {
+                       temp.insert(i,"\\\"");
+                       i++;
+                   }
+                    */
 
-                return "\"" + str_ + "\"";
+                   if(str_[i]=='\\' || str_[i] == '\"')
+                       ret+='\\';
+
+                   ret+=str_[i];
+               }
+                ret+='\"';
+                return ret;
+
+                //replace_substr(temp, "\\", "\\\\");
+               // replace_substr(temp, "\"", "\\\"");
+
                 //return temp;
                 }
             case 5: {
@@ -87,21 +117,17 @@ namespace nets {
                 return temp;
             }
             case 6: {
-                /*std::string temp;
-                for (auto &n: this->map_) {
-                    temp.append(n.second.ToString());
-                }
-                return temp;*/
-                std::string data = "{";
+
+               std::string data = "{\"";
                 for (auto &n : this->map_) {
-                    std::string cos = n.first;
-                    for (int i=0;i<cos.length();i++){
-                        if (cos[i]=='\"' || cos[i]=='\\'){
-                            cos.insert(i, 1,'\\');
-                            i++;
+
+                        for(int i =0;i<n.first.length();i++) {
+                            if (n.first[i] == '\\' || n.first[i] == '\"')
+                                data += '\\';
+
+                            data += n.first[i];
                         }
-                    }
-                    data = data+"\""+cos+"\": "+n.second.ToString()+", ";
+                    data +="\": "+n.second.ToString()+", ";
                 }
                 data[data.size()-2]='}';
                 data.pop_back();
