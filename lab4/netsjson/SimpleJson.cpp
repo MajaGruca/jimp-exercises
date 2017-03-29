@@ -5,6 +5,17 @@
 #include <regex>
 namespace nets {
 
+    std::string AddBackslash(std::string str)
+    {
+        std::string temp = "";
+        for(int i = 0;i<str.length();i++)
+        {
+            if(str[i]=='\\' || str[i] == '\"')
+                temp+='\\';
+            temp+=str[i];
+        }
+        return temp;
+    }
 
     JsonValue::JsonValue(int a) {
         int_ = a;
@@ -20,23 +31,12 @@ namespace nets {
         boo_ = a;
         constructor = 3;
     }
+
     JsonValue::~JsonValue(){
         map_.clear();
-
     }
 
     JsonValue::JsonValue(std::string a){
-       /* for(int i=0;i<a.size();i++)
-        {
-            str_.push_back(a[i]);
-        }*/
-        std::string cos = a;
-        for (int i=0; i < cos.length(); i++){
-            if (cos[i]=='\"' || cos[i]=='\\'){
-                cos.insert(i, 1,'\\');
-                i++;
-            }
-        }
         str_=a;
         constructor = 4;
     }
@@ -56,54 +56,24 @@ namespace nets {
             case 1:
                 return std::to_string(int_);
             case 2: {
-                std::string temp1 = std::to_string(dou_);
-                std::string temp2;
-                int i = 0;
-                while (temp1[i] != '0') {
-                    temp2.push_back(temp1[i]);
-                    i++;
+                std::string temp = std::to_string(dou_);
+                int i = temp.size()-1;
+                while (temp[i] == '0') {
+                    temp.pop_back();
+                    i--;
                 }
-                return temp2;
+                return temp;
             }
-
             case 3:
-                if (boo_ )//== true)
+                if (boo_ )
                     return "true";
                 else
                     return "false";
             case 4: {
-                //std::smatch matching_substring;
-                //std::string temp=str_,pom=temp;
-                //for (auto n: str_) {
-                 //   temp.push_back(n);
-                 //   }
-                std::string ret = "\"";
-               for(int i =0;i<str_.length();i++)
-               {
-                   /*if(temp[i]=='\\')
-                   {
-                       temp.insert(i,"\\\\");
-                       i++;
-                   }
-                   if(temp[i]=='\"')
-                   {
-                       temp.insert(i,"\\\"");
-                       i++;
-                   }
-                    */
-
-                   if(str_[i]=='\\' || str_[i] == '\"')
-                       ret+='\\';
-
-                   ret+=str_[i];
-               }
-                ret+='\"';
-                return ret;
-
-                //replace_substr(temp, "\\", "\\\\");
-               // replace_substr(temp, "\"", "\\\"");
-
-                //return temp;
+                std::string temp = "\"";
+                temp+=AddBackslash(str_);
+                temp+='\"';
+                return temp;
                 }
             case 5: {
                 std::string temp="[";
@@ -117,39 +87,25 @@ namespace nets {
                 return temp;
             }
             case 6: {
-
                std::string data = "{\"";
-                for (auto &n : this->map_) {
-
-                        for(int i =0;i<n.first.length();i++) {
-                            if (n.first[i] == '\\' || n.first[i] == '\"')
-                                data += '\\';
-
-                            data += n.first[i];
-                        }
-                    data +="\": "+n.second.ToString()+", ";
+                for (auto &n : map_) {
+                    data += AddBackslash(n.first);
+                    data += "\": "+n.second.ToString()+", \"";
                 }
-                data[data.size()-2]='}';
+                data[data.size()-3]='}';
+                data.pop_back();
                 data.pop_back();
                 return data;
             }
             default:
                 break;
             }
-
         }
-    std::experimental::optional<JsonValue> JsonValue::ValueByName(const std::string &name) const {
 
-            for (auto &n: map_) {
-                if (n.first == name)
-                    return n.second;//std::experimental::make_optional(map_.at(name));
-                //else
-                  //  return {};
-            }
-
-            //if(map_.at(name)) {
-            // std::experimental::optional<JsonValue> temp = map_.at(name).ToString();
-            // return temp;
-            //}
+    std::experimental::optional<JsonValue> JsonValue::ValueByName(const std::string &name) const{
+        for (auto &n: map_) {
+            if (n.first == name)
+                return n.second;
+        }
     }
 }

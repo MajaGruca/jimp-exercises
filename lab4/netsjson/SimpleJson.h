@@ -10,12 +10,7 @@
 #include "vector"
 #include "map"
 namespace nets{
-
-    enum SupportedType{
-        INT,
-        DOUBLE,
-        BOOL
-    };
+    std::string AddBackslash(std::string str);
 
     class JsonValue{
     public:
@@ -28,7 +23,6 @@ namespace nets{
         JsonValue(std::map<std::string,JsonValue> a);
         ~JsonValue();
         std::string ToString() const;
-        void GetBoo() const;
         std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;
     private:
         int int_;
