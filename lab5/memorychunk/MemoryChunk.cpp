@@ -3,6 +3,8 @@
 //
 
 #include "MemoryChunk.h"
+#include <stdio.h>
+#include <string.h>
 namespace memorychunk
 {
     MemoryChunk::MemoryChunk(size_t sz) {
@@ -17,10 +19,9 @@ namespace memorychunk
 
     MemoryChunk::MemoryChunk(const MemoryChunk& memorychunk) {
         ptr = new int8_t[memorychunk.siz];
-        std::copy(ptr,memorychunk.ptr);
-        std::copy(siz,memorychunk.siz);
+        siz = memorychunk.siz;
+        memcpy(ptr,memorychunk.ptr,siz);
     }
-
     MemoryChunk & MemoryChunk::operator=(const MemoryChunk& memorychunk) {
         if (this == &memorychunk) {
             return *this;
@@ -65,6 +66,5 @@ namespace memorychunk
         }
         else
             return 0;
-
     }
 }
