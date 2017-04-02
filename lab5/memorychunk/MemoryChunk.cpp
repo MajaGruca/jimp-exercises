@@ -34,20 +34,20 @@ namespace memorychunk
         siz=memorychunk.siz;
     }
 
-    MemoryChunk::MemoryChunk(MemoryChunk &&xxx) : ptr{nullptr}, siz{0} {
-        std::swap(ptr,xxx.ptr);
-        std::swap(siz,xxx.siz);
+    MemoryChunk::MemoryChunk(MemoryChunk &&memorychunk) : ptr{nullptr}, siz{0} {
+        std::swap(ptr,memorychunk.ptr);
+        std::swap(siz,memorychunk.siz);
     }
 
-    MemoryChunk & MemoryChunk::operator=(MemoryChunk &&xxx) {
-        if (this == &xxx) {
-            return xxx;
+    MemoryChunk & MemoryChunk::operator=(MemoryChunk &&memorychunk) {
+        if (this == &memorychunk) {
+            return memorychunk;
         }
         delete[] ptr;
         ptr = nullptr;
         siz=0;
-        std::swap(ptr,xxx.ptr);
-        std::swap(siz,xxx.siz);
+        std::swap(ptr,memorychunk.ptr);
+        std::swap(siz,memorychunk.siz);
     }
 
 

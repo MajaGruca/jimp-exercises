@@ -16,8 +16,8 @@ namespace memorychunk
         size_t ChunkSize() const;
         MemoryChunk(const MemoryChunk& memorychunk);
         MemoryChunk & operator=(const MemoryChunk& memorychunk);
-        MemoryChunk & operator=(MemoryChunk &&xxx);
-        MemoryChunk(MemoryChunk &&xxx);
+        MemoryChunk & operator=(MemoryChunk &&memorychunk);
+        MemoryChunk(MemoryChunk &&memorychunk);
     private:
         int8_t *ptr;
         size_t siz;
