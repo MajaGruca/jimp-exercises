@@ -6,17 +6,16 @@
 #include "Matrix.h"
 using namespace std;
 int main(int argc, char* argv[]){
-    Matrix m1("[1i3 2i5 3; 3 4 5; 6 7 8]");
-    Matrix m2("[1i3 2i5 0; 3 4 5; 6 7 8]");
+    algebra::Matrix m1(argv[1]);
+    algebra::Matrix m2(argv[2]);
 
-    cout << "Macierz pierwsza: " << m1.print() << endl;
-    cout << "Macierz druga: " << m2.print() << endl;
+    cout << "Macierz pierwsza: " << m1.Print() << endl;
+    cout << "Macierz druga: " << m2.Print() << endl;
 
-    cout << "Dodawanie" << (m1.add(m2)).print() << endl;
-    //cout << "Odejmowanie" << (m1.sub(m2)).print() << endl;
-    //cout << "Mnożenie" << (m1.mul(m2)).print() << endl;
-    //cout << "Dzielenie" << (m1.div(m2)).print() << endl;
-    //cout << "Potęgowanie" << (m1.pow(2)).print() << endl;
-    //cout << "Potęgowanie" << (m2.pow(2)).print() << endl;
-    return 0;
+    cout << "Dodawanie" << (m1.Add(m2)).Print() << endl;
+    cout << "Odejmowanie" << (m1.Sub(m2)).Print() << endl;
+    cout << "Mnożenie" << (m1.Mul(m2)).Print() << endl;
+    cout << "Dzielenie" << (m1.Div(m2)).Print() << endl;
+    cout << "Potęgowanie" << (m1.Pow(2)).Print() << endl;
+    cout << "Potęgowanie" << (m2.Pow(2)).Print() << endl;
 }
