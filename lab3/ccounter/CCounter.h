@@ -11,7 +11,6 @@
 namespace ccounter{
     struct Counter{
         std::map<std::string, int> dictionary;
-
     };
 
 std::unique_ptr<Counter> Init();
