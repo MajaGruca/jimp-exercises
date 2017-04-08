@@ -46,7 +46,13 @@ namespace academia {
     {
         return this->year != a.year;
     }
-
+/*    std::string StudyYear::GetID()const
+    {
+        return this->
+    }
+    std::string StudyYear::GetFN()const;
+    std::string StudyYear::GetLN()const;
+    std::string StudyYear::GetP()const;*/
     int StudyYear::GetY() const
     {
         return this->year;

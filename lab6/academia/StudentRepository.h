@@ -29,10 +29,10 @@ namespace academia{
         StudyYear();
         StudyYear(int a);
         operator int() const;
-        /*std::string GetID();
-        std::string GetFN();
-        std::string GetLN();
-        std::string GetP();*/
+        /*std::string GetID()const;
+        std::string GetFN()const;
+        std::string GetLN()const;
+        std::string GetP()const;*/
         int GetY() const ;
         void operator++();
 
@@ -48,7 +48,12 @@ namespace academia{
         int year;
     };
     class Student  {
-
+   /* public:
+        std::string GetID()const;
+        std::string GetFN()const;
+        std::string GetLN()const;
+        std::string GetP()const;
+        int GetY() const ;*/
     private:
         std::string id;
         std::string first_name;
