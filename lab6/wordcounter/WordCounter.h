@@ -23,6 +23,11 @@ namespace datastructures
     };
 
     class WordCounter {
+    public:
+        //DistinctWords(); // return all unoque words
+        //TotalWords();  // return int all words
+        //Words();   //return set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
+
     private:
         std::map<Word, Counts> aa;
     };
