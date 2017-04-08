@@ -5,17 +5,28 @@
 #ifndef JIMP_EXERCISES_WORDCOUNTER_H
 #define JIMP_EXERCISES_WORDCOUNTER_H
 
+#include <string>
+#include <memory>
+#include <map>
 namespace datastructures
 {
-    class WordCounter {
-
-    };
     class Counts {
+
+    private:
+        int wordcount;
 
     };
     class Word {
+    private:
+        std::string word;
 
     };
+
+    class WordCounter {
+    private:
+        std::map<Word, Counts> aa;
+    };
+
 };
 
 
