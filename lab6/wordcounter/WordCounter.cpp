@@ -22,10 +22,7 @@ namespace datastructures
     }
 
     Counts::Counts() {
-if(wordcount>=0)
-    wordcount++;
-else
-    wordcount=0;
+        wordcount=1;
     }
 
     int Counts::operator+(Counts a) const {
@@ -79,7 +76,7 @@ else
     }
 
     bool Word::operator==(Word a) const{
-        if(word==a.word)
+        if(!word.compare(a.word))
             return true;
         else
             return false;
@@ -107,7 +104,7 @@ else
         std::string word1;
         while (file >> word1)
         {
-            one_of_them.emplace(word1,1 );
+            one_of_them.emplace(word1,1);
         }
     }
     WordCounter::WordCounter(std::initializer_list<Word> s) {
@@ -120,18 +117,17 @@ else
                 {
                     ex=true;
                     ++m.second;
-                    break;
                 }
             }
             if(ex==false)
             {
-                one_of_them.emplace(n,Counts(1));
+                one_of_them.emplace(n,Counts());
             }
         }
     }
 
-    Counts WordCounter::operator[](std::string a){
-        return this->one_of_them[a];
+    Counts WordCounter::operator[](Word a){
+        return one_of_them[a];
     }
     std::set<Word> WordCounter::Words() {
         return std::set<Word>();
@@ -141,6 +137,7 @@ else
         int sum=0;
         for(auto &n:one_of_them)
             sum=sum+n.second.GetCounts();
+
         return sum;
     }
 

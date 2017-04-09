@@ -51,19 +51,19 @@ namespace datastructures
         WordCounter()= default;
         WordCounter(std::string str);
         WordCounter(std::initializer_list<Word> s);
-        Counts operator[](std::string a);
+        Counts operator[](Word a);
         int DistinctWords(); // return all unoque words
         int TotalWords();  // return int all words
         std::set<Word> Words();   //return
         //set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
-        void operator++();
-        void operator--();
+        //void operator++();
+        //void operator--();
         bool operator<(WordCounter a) const ;
-        bool operator<=(WordCounter a) const ;
-        bool operator>(WordCounter a) const ;
-        bool operator>=(WordCounter a) const ;
-        bool operator==(WordCounter a) const ;
-        bool operator!=(WordCounter a) const ;
+        //bool operator<=(WordCounter a) const ;
+        //bool operator>(WordCounter a) const ;
+        //bool operator>=(WordCounter a) const ;
+        //bool operator==(WordCounter a) const ;
+        //bool operator!=(WordCounter a) const ;
 
         std::map<Word,Counts> GetIT() const;
     private:
