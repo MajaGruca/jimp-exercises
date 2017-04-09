@@ -12,7 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include <numeric>
-
+#include <ostream>
 namespace datastructures
 {
 
@@ -155,4 +155,16 @@ else
     bool WordCounter::operator<(WordCounter a) const {
         return false;
     }
+
+    std::map<Word, Counts> WordCounter::GetIT() const {
+        return one_of_them;
+    }
+
+    std::ostream& operator<<(std::ostream & output,WordCounter& p){
+        for(auto &n:p.GetIT())
+        output<<'{'<<n.first.GetWord()<<','<<n.second.GetCounts()<<"}, ";
+
+        return output;
+    }
+
 };

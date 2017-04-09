@@ -65,10 +65,12 @@ namespace datastructures
         bool operator==(WordCounter a) const ;
         bool operator!=(WordCounter a) const ;
 
+        std::map<Word,Counts> GetIT() const;
     private:
         std::map<Word,Counts> one_of_them;
     };
     bool operator==(int a,Counts b);
+    std::ostream& operator<<(std::ostream &is, WordCounter& point);
 };
 
 
