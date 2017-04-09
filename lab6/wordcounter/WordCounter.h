@@ -8,15 +8,24 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <set>
+#include <initializer_list>
 namespace datastructures
 {
     class Counts {
+    public:
+        Counts()= default;
+        Counts(int count);
 
     private:
         int wordcount;
 
     };
     class Word {
+    public:
+        Word()= default;
+        Word(std::string str);
+
     private:
         std::string word;
 
@@ -24,12 +33,18 @@ namespace datastructures
 
     class WordCounter {
     public:
-        //DistinctWords(); // return all unoque words
-        //TotalWords();  // return int all words
-        //Words();   //return set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
+        WordCounter()= default;
+        WordCounter(std::string str);
+        //WordCounter(std::string str);
+        WordCounter(std::initializer_list<Word> s);
+
+        int DistinctWords(); // return all unoque words
+        int TotalWords();  // return int all words
+        std::set<Word> Words();   //return
+        //set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
 
     private:
-        std::map<Word, Counts> aa;
+        std::map<Word,Counts> one_of_them;
     };
 
 };
