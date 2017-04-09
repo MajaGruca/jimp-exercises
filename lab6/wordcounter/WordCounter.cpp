@@ -11,6 +11,7 @@
 #include <initializer_list>
 #include <fstream>
 #include <iostream>
+#include <numeric>t
 
 namespace datastructures
 {
@@ -18,6 +19,21 @@ namespace datastructures
    // product1 = std::make_pair(std::string("lightbulbs"),0.99);
     Counts::Counts(int count) {
         wordcount=count;
+    }
+
+    Counts::Counts() {
+if(wordcount>=0)
+    wordcount++;
+else
+    wordcount=0;
+    }
+
+    int Counts::operator+(Counts a) const {
+        return this->wordcount+a.wordcount;
+    }
+
+    int Counts::operator+(int a) const {
+        return this->wordcount+a;
     }
 
     int Counts::GetCounts() const{
@@ -91,7 +107,7 @@ namespace datastructures
         std::string word1;
         while (file >> word1)
         {
-            ++one_of_them[word1];
+            one_of_them.emplace(word1,1 );
         }
     }
     WordCounter::WordCounter(std::initializer_list<Word> s) {
@@ -129,11 +145,7 @@ namespace datastructures
     }
 
     int WordCounter::DistinctWords() {
-        int sum=0;
-        for(auto &n:one_of_them){
-            sum++;
-        }
-        return sum;
+        return (int) one_of_them.size();
     }
     bool operator==(int a,Counts b)
     {
@@ -141,3 +153,7 @@ namespace datastructures
     }
 }
 
+    bool WordCounter::operator<(WordCounter a) const {
+        return false;
+    }
+};
