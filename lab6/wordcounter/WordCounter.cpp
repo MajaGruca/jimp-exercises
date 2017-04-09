@@ -126,8 +126,8 @@ namespace datastructures
         }
     }
 
-    Counts WordCounter::operator[](Word a){
-        return one_of_them[a];
+    Counts WordCounter::operator[](std::string a){
+        return one_of_them[Word(a)];
     }
     std::set<Word> WordCounter::Words() {
         return std::set<Word>();
@@ -151,5 +151,15 @@ namespace datastructures
 
     bool WordCounter::operator<(WordCounter a) const {
         return false;
+    }
+    std::map<Word, Counts> WordCounter::GetIT() const {
+        return one_of_them;
+    }
+
+    std::ostream& operator<<(std::ostream & output,WordCounter& p){
+        for(auto &n:p.GetIT())
+            output<<'{'<<n.first.GetWord()<<','<<std::to_string(n.second.GetCounts())<<"}, ";
+
+        return output;
     }
 };
