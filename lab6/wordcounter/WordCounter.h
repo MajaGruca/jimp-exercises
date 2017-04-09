@@ -9,6 +9,7 @@
 #include <memory>
 #include <map>
 #include <set>
+#include "vector"
 #include <initializer_list>
 namespace datastructures
 {
@@ -55,7 +56,7 @@ namespace datastructures
         int DistinctWords(); // return all unoque words
         int TotalWords();  // return int all words
         std::set<Word> Words();   //return
-        std::map<Word, Counts> GetIT() const;
+        std::vector<std::pair<Word,Counts>> GetIT() const;
         //set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
         //void operator++();
         //void operator--();
@@ -67,7 +68,7 @@ namespace datastructures
         //bool operator!=(WordCounter a) const ;
 
     private:
-        std::map<Word,Counts> one_of_them;
+        std::vector<std::pair<Word,Counts>> one_of_them;
     };
     bool operator==(int a,Counts b);
 

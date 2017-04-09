@@ -22,7 +22,7 @@ namespace datastructures
     }
 
     Counts::Counts() {
-        wordcount=1;
+        wordcount=0;
     }
 
     int Counts::operator+(Counts a) const {
@@ -102,42 +102,59 @@ namespace datastructures
         if (!file.is_open()) return;
 
         std::string word1;
-        while (file >> word1)
-        {
-            one_of_them.emplace(word1,1);
+        while (file >> word1) {
+            bool ex = false;
+            for (int i=0; i < one_of_them.size();i++) {
+                if (one_of_them[i].first == Word(word1)) {
+                    ex = true;
+                    ++one_of_them[i].second;
+                }
+            }
+            if (ex == false) {
+                one_of_them.push_back(std::pair<Word, Counts>(Word(word1), Counts(1)));
+            }
         }
     }
     WordCounter::WordCounter(std::initializer_list<Word> s) {
         for(auto n:s)
         {
             bool ex=false;
-            for(auto m:one_of_them)
+            for(int i=0;i<one_of_them.size();i++)
             {
-                if(m.first==n)
+                if(one_of_them[i].first==n)
                 {
                     ex=true;
-                    ++m.second;
+                    ++one_of_them[i].second;
                 }
             }
             if(ex==false)
             {
-                one_of_them.emplace(n,Counts());
+                one_of_them.push_back(std::pair<Word,Counts>(n,Counts(1)));
             }
         }
     }
 
     Counts WordCounter::operator[](std::string a){
-        return one_of_them[Word(a)];
+        for(int i=0;i<one_of_them.size();i++)
+        {
+            if(one_of_them[i].first==Word(a))
+                return one_of_them[i].second;
+        }
+
     }
+
     std::set<Word> WordCounter::Words() {
-        return std::set<Word>();
+        std::vector<Word> cp;
+        for(int i=0;i<one_of_them.size();i++)
+            cp.push_back(one_of_them[i].first);
+        std::set<Word> s(cp.begin(), cp.end());
+        return s;
     }
 
     int WordCounter::TotalWords() {
         int sum=0;
         for(auto &n:one_of_them)
             sum=sum+n.second.GetCounts();
-
         return sum;
     }
 
@@ -152,7 +169,7 @@ namespace datastructures
     bool WordCounter::operator<(WordCounter a) const {
         return false;
     }
-    std::map<Word, Counts> WordCounter::GetIT() const {
+    std::vector<std::pair<Word,Counts>> WordCounter::GetIT() const {
         return one_of_them;
     }
 
