@@ -14,9 +14,10 @@ namespace datastructures
 {
     class Counts {
     public:
-        Counts()= default;
+        Counts();
         Counts(int count);
-
+        int operator+(Counts a) const ;
+        int operator+(int a) const ;
     private:
         int wordcount;
 
@@ -25,6 +26,8 @@ namespace datastructures
     public:
         Word()= default;
         Word(std::string str);
+        bool operator<(Word a) const ;
+
 
     private:
         std::string word;
@@ -42,6 +45,14 @@ namespace datastructures
         int TotalWords();  // return int all words
         std::set<Word> Words();   //return
         //set<Word> expected_words {Word("a"),Word("hi"), Word("voltage"), Word("p")};
+        void operator++();
+        void operator--();
+        bool operator<(WordCounter a) const ;
+        bool operator<=(WordCounter a) const ;
+        bool operator>(WordCounter a) const ;
+        bool operator>=(WordCounter a) const ;
+        bool operator==(WordCounter a) const ;
+        bool operator!=(WordCounter a) const ;
 
     private:
         std::map<Word,Counts> one_of_them;

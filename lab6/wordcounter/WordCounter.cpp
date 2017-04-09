@@ -11,6 +11,7 @@
 #include <initializer_list>
 #include <fstream>
 #include <iostream>
+#include <numeric>t
 
 namespace datastructures
 {
@@ -22,9 +23,30 @@ namespace datastructures
         wordcount=count;
     }
 
+    Counts::Counts() {
+if(wordcount>=0)
+    wordcount++;
+else
+    wordcount=0;
+    }
+
+    int Counts::operator+(Counts a) const {
+        return this->wordcount+a.wordcount;
+    }
+
+    int Counts::operator+(int a) const {
+        return this->wordcount+a;
+    }
+
     Word::Word(std::string str) {
         word=str;
     }
+
+    bool Word::operator<(Word a) const {
+        return false;
+    }
+
+
 
     WordCounter::WordCounter(std::string str) {
         std::ifstream file;
@@ -32,10 +54,9 @@ namespace datastructures
         if (!file.is_open()) return;
 
         std::string word1;
-Word ww {"ana"};
         while (file >> word1)
         {
-
+            one_of_them.emplace(word1,1 );
         }
     }
     WordCounter::WordCounter(std::initializer_list<Word> s) {
@@ -46,14 +67,23 @@ Word ww {"ana"};
     }
 
     int WordCounter::TotalWords() {
-        return 0;
+
+
+        return std::accumulate(std::begin(one_of_them)
+                , std::end(one_of_them)
+                , 0
+                , [] (int value, const std::map<Word, Counts>::value_type& p)
+                               { return value + p.second; }
+        );;
     }
 
     int WordCounter::DistinctWords() {
-        return 0;
+        return (int) one_of_them.size();
     }
 
-
+    bool WordCounter::operator<(WordCounter a) const {
+        return false;
+    }
 
 
 };
