@@ -11,7 +11,7 @@
 #include <initializer_list>
 #include <fstream>
 #include <iostream>
-#include <numeric>t
+#include <numeric>
 
 namespace datastructures
 {
@@ -151,7 +151,6 @@ else
     {
         return a==b.GetCounts();
     }
-}
 
     bool WordCounter::operator<(WordCounter a) const {
         return false;

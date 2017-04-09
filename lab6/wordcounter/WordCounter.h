@@ -15,7 +15,6 @@ namespace datastructures
     class Counts {
     public:
         int GetCounts() const;
-        Counts()= default;
         Counts();
         Counts(int count);
         void operator++();
@@ -40,7 +39,6 @@ namespace datastructures
         bool operator<(Word a) const;
         bool operator==(Word a) const;
         std::string GetWord() const;
-        bool operator<(Word a) const ;
 
 
     private:
