@@ -14,9 +14,18 @@ namespace datastructures
 {
     class Counts {
     public:
+        int GetCounts() const;
         Counts()= default;
         Counts(int count);
-
+        void operator++();
+        void operator--();
+        //bool operator<(Counts a) const ;
+        //bool operator<=(Counts a) const ;
+        //bool operator>(Counts a) const ;
+        //bool operator>=(Counts a) const ;
+        bool operator==(Counts a) const ;
+        bool operator!=(Counts a) const ;
+        bool operator==(int a) const ;
     private:
         int wordcount;
 
@@ -25,7 +34,9 @@ namespace datastructures
     public:
         Word()= default;
         Word(std::string str);
-
+        bool operator<(Word a) const;
+        bool operator==(Word a) const;
+        std::string GetWord() const;
     private:
         std::string word;
 
@@ -35,9 +46,8 @@ namespace datastructures
     public:
         WordCounter()= default;
         WordCounter(std::string str);
-        //WordCounter(std::string str);
         WordCounter(std::initializer_list<Word> s);
-
+        Counts operator[](std::string a);
         int DistinctWords(); // return all unoque words
         int TotalWords();  // return int all words
         std::set<Word> Words();   //return
@@ -46,9 +56,8 @@ namespace datastructures
     private:
         std::map<Word,Counts> one_of_them;
     };
-
+    bool operator==(int a,Counts b);
 };
-
 
 
 #endif //JIMP_EXERCISES_WORDCOUNTER_H
