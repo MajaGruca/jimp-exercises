@@ -12,7 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include <numeric>
-
+#include <ostream>
 namespace datastructures
 {
 

@@ -5,7 +5,7 @@
 #include "iostream"
 int main()
 {
-    datastructures::WordCounter counter {datastructures::Word("enigma"), datastructures::Word("enigma"), datastructures::Word("puzzle")};
-    std::cout << counter.DistinctWords();
+    datastructures::WordCounter counter {datastructures::Word("Wenigma"), datastructures::Word("enigma"), datastructures::Word("puzzle")};
+    std::cout << counter;
     return 0;
 }
