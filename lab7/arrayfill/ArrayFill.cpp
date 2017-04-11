@@ -23,5 +23,10 @@ namespace arrays{
         return a_*index + b_;
     }
 
-
+    int SquaredFill::Value(int index) const{
+        return a_*index*index + b_;
+    }
+    int RandomFill::Value(int index) const{
+        return (*b_)(*a_);
+    }
 }
