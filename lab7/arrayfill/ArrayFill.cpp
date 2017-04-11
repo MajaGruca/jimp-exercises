@@ -15,8 +15,13 @@ namespace arrays{
         }
     }
 
+    int UniformFill::Value(int index) const {
+        return value_;
+    }
 
-int UniformFill::Value(int index) const {
-    return value_;
-}
+    int IncrementalFill::Value(int index) const{
+        return a_*index + b_;
+    }
+
+
 }

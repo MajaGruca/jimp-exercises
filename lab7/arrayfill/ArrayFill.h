@@ -21,6 +21,19 @@ namespace arrays {
         int value_;
     };
 
+    int UniformFillWithZero(int index);
+
+    int UniformFillWith77(int index);
+
+    class IncrementalFill : public ArrayFill{
+    public:
+        IncrementalFill(int value=0,int a=0, int b=0) : value_{value}, a_{a}, b_{b}{}
+        virtual int Value(int index) const override;
+    private:
+        int value_;
+        int a_;
+        int b_;
+    };
 }
 
 #endif //JIMP_EXERCISES_ARRAYFILL_H
