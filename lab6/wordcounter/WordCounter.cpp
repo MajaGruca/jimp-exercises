@@ -94,4 +94,39 @@ namespace datastructures
         }
         return 0;
     }
+
+    WordCounter WordCounter::FromInputStream(std::istream *input) {
+        std::string str="";
+        char temp;
+
+        while (*input)
+        {
+            temp= char((*input).get());
+            if(isalpha(temp))
+                str=str+temp;
+
+             else
+            {
+                if(str.length())
+                {
+                    bool ex=false;
+                    for(int i=0;i<all_words.size();i++)
+                    {
+                        if(all_words[i].first==str)
+                        {
+                            ex=true;
+                            ++all_words[i].second;
+                        }
+                    }
+                    if(!ex)
+                    {
+                        all_words.push_back(std::pair<Word,Counts>(str,Counts(1)));
+                    }
+
+                }
+                str="";
+            }
+        }
+        return WordCounter();
+    }
 };

@@ -3,7 +3,8 @@
 //
 #include "WordCounter.h"
 #include "Word.h"
-#include "iostream"
+#include <iostream>
+#include <fstream>
 int main()
 {
     datastructures::WordCounter counter {datastructures::Word("enigma"), datastructures::Word("puzzle"), datastructures::Word("puzzle"), datastructures::Word("puzzle"), datastructures::Word("pazzle")};
@@ -11,7 +12,17 @@ int main()
     int ilosc = counter["puzzle"];
     std::cout <<ilosc<<std::endl;
 
-    datastructures::WordCounter ss {"C:\\Users\\ktr\\Desktop\\test.txt"};
-    std::cout<<ss;
+
+    std::filebuf fb;
+    if (fb.open ("C:\\Users\\ktr\\Desktop\\test.txt",std::ios::in))
+    {
+        std::istream is(&fb);
+        counter.FromInputStream(&is);
+        fb.close();
+    }
+
+    std::cout<<counter;
+
+
     return 0;
 }
