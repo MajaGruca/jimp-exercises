@@ -2,26 +2,21 @@
 // Created by ktr on 08.04.2017.
 //
 
-#include "WordCounter.h"
-#include "Word.h"
-#include "Counts.h"
-#include <string>
-#include <memory>
-#include <utility>
-#include <map>
-#include <set>
-#include <initializer_list>
+
 #include <fstream>
 #include <iostream>
 #include <numeric>
-#include <ostream>
 #include <algorithm>
+#include <utility>
+#include "WordCounter.h"
+
 namespace datastructures
 {
     WordCounter::WordCounter(std::string str) {
-        std::ifstream file;
-        file.open (str);
-        if (!file.is_open()) return;
+        std::ifstream file(str);
+        if(!file)
+            return;
+
 
         std::string word1;
         while (file >> word1) {
@@ -36,6 +31,7 @@ namespace datastructures
                 all_words.push_back(std::pair<Word, Counts>(Word(word1), Counts(1)));
             }
         }
+        file.close();
     }
     WordCounter::WordCounter(std::initializer_list<Word> s) {
         for(auto n:s)
@@ -96,5 +92,6 @@ namespace datastructures
             if(all_words[i].first==Word(a))
                 return all_words[i].second.GetCounts();
         }
+        return 0;
     }
 };
