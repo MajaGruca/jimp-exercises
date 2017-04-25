@@ -30,7 +30,8 @@ public:
     void SetY(double y);
 };
 
-
+std::istream& operator>>(std::istream &is, Point& point);
+std::ostream& operator<<(std::ostream &is, Point& point);
 
 
 #endif //JIMP_EXERCISES_POINT_H
