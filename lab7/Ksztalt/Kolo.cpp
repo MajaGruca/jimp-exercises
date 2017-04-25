@@ -6,5 +6,5 @@
 
 
 std::string Kolo::draw() {
-    return "⃝";
+    return " ⃝";
 }
