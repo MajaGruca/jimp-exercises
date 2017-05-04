@@ -5,11 +5,16 @@
 #ifndef JIMP_EXERCISES_MOVIESUBTITLES_H
 #define JIMP_EXERCISES_MOVIESUBTITLES_H
 
+#include <string>
+#include <exception>
+
+
 namespace moviesubs
 {
     class MicroDvdSubtitles {
 
-        //ShiftAllSubtitlesBy
+    public:
+        std::string ShiftAllSubtitlesBy(int delay, int fps,const char* in, const char* out);
 
     };
 

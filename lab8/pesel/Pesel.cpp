@@ -14,7 +14,7 @@ namespace academia
         while(a[j])
         {
             str=str+a[j];
-j++;
+            j++;
         }
         if(str.length()!=11)
             throw InvalidPeselLength();
