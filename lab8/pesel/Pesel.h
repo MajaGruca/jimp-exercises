@@ -7,36 +7,45 @@
 
 #include <string>
 #include <exception>
-#include <stdexcept>
+#include <iostream>
+
 namespace academia{
     class Pesel {
 
     public:
        // Pesel();
-        Pesel(const char *str);
-        ~Pesel();
+        Pesel(std::string pesel);
+        virtual ~Pesel();
+
+    private:
+        std::string pesel;
     };
+
+
     class AcademiaDataValidationError : public std::runtime_error{
 
     public:
-        AcademiaDataValidationError(const std::string &m) : std::runtime_error::runtime_error(m){
-            //std::cerr <<
-        }
-    };
-    class InvalidPeselLength : public AcademiaDataValidationError{
-    public:
-        InvalidPeselLength();
-    };
-    class InvalidPeselCharacter: public AcademiaDataValidationError{
-    public:
-        InvalidPeselChecksum();
-    };
-    class InvalidPeselChecksum : public AcademiaDataValidationError{
-    public:
-        InvalidPeselChecksum(const char  aa, int a);
+        AcademiaDataValidationError(const std::string &pesel ) : std::runtime_error::runtime_error(pesel){
+
+        };
     };
 
-    //validatePESEL(const char* a);
+
+    class InvalidPeselLength: public AcademiaDataValidationError{
+    public:
+        InvalidPeselLength(std::string pesel, int pesel_lenght);
+    };
+
+    class InvalidPeselCharacter: public AcademiaDataValidationError {
+    public:
+        InvalidPeselCharacter(std::string pesel);
+    };
+
+    class InvalidPeselChecksum: public AcademiaDataValidationError
+    {
+    public:
+        InvalidPeselChecksum(std::string pesel, int check_sum);
+    };
 }
 
 
