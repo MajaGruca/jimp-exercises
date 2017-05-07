@@ -7,46 +7,74 @@
 
 #include <string>
 #include <exception>
+#include <memory>
+#include <stdexcept>
 
 
 namespace moviesubs
 {
-    class MicroDvdSubtitles {
-
-    public:
-        std::string ShiftAllSubtitlesBy(int delay, int fps,const char* in, const char* out);
-
-    };
-
-    class SubRipSubtitles {
-
-
-
-    };
     class MovieSubtitles {
 
+    public:
+        MovieSubtitles();
+        virtual ~MovieSubtitles();
 
-
-    };
-    class NegativeFrameAfterShift
-    {
-
-    };
-    class SubtitleEndBeforeStart
-    {
+        virtual void ShiftAllSubtitlesBy(int delay, int fps,std::stringstream *in, std::stringstream *out);
 
     };
-    class InvalidSubtitleLineFormat
+
+
+    class MicroDvdSubtitles : public MovieSubtitles{
+
+    public:
+        MicroDvdSubtitles();
+        virtual ~MicroDvdSubtitles();
+
+        virtual void ShiftAllSubtitlesBy(int delay, int fps,std::stringstream *in, std::stringstream *out);
+    };
+
+    class SubRipSubtitles : public MovieSubtitles {
+
+    public:
+        SubRipSubtitles();
+        virtual ~SubRipSubtitles();
+    };
+
+
+    class MovieSubtitlesError : public std::runtime_error
     {
+    public:
+        MovieSubtitlesError();
+        //MovieSubtitlesError() : std::runtime_error::runtime_error(){
+
+        //};
+    };
+    class NegativeFrameAfterShift : public MovieSubtitlesError
+    {
+    public:
+        NegativeFrameAfterShift();
+    };
+    class SubtitleEndBeforeStart : public MovieSubtitlesError
+    {
+    public:
+        SubtitleEndBeforeStart();
 
     };
-    class MissingTimeSpecification
+    class InvalidSubtitleLineFormat : public MovieSubtitlesError
     {
+    public:
+        InvalidSubtitleLineFormat();
+    };
+    class MissingTimeSpecification : public MovieSubtitlesError
+    {
+    public:
+        MissingTimeSpecification();
 
     };
-    class OutOfOrderFrames
+    class OutOfOrderFrames : public MovieSubtitlesError
     {
-
+    public:
+        OutOfOrderFrames();
     };
 }
 
