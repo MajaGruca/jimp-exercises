@@ -177,7 +177,7 @@ namespace moviesubs {
                                            " --> " + tab_pom1[4] + ":" + tab_pom1[5] + ":" + tab_pom1[6] + "," +
                                            tab_pom1[7]) << '\n';
             } else throw InvalidSubtitleLineFormat();
-            //*out << "dupa";//linijka << '\n';
+
 
         }
 
