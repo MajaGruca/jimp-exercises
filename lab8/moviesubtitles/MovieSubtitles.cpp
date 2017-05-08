@@ -18,18 +18,14 @@ namespace moviesubs {
     }
 
     void MicroDvdSubtitles::ShiftAllSubtitlesBy(int delay, int fps, std::stringstream *in, std::stringstream *out) {
-        //MovieSubtitles::ShiftAllSubtitlesBy(delay, fps, in, out);
+
 
         std::string pom = in->str();
         double dodanie_o = ((double) delay / 1000) * fps;
         std::smatch mm;
-        std::smatch mmm;
         std::regex ee("[0-9]+");
-        std::regex eee("([0-9]{2}:){2}([0-9]{2},[0-9]{3})");
         std::string linijka_pom;
-        std::string temp;
         int tab_pom[2];
-        std::string tab_pom1[8];
         int line_num = 0;
 
         while (pom.length() > 0) {
@@ -92,9 +88,7 @@ namespace moviesubs {
         std::smatch mm;
         std::smatch mmm;
         std::regex ee("[0-9]+");
-        //std::regex eee("([0-9]{2}:){2}([0-9]{2},[0-9]{3})");
         std::string linijka_pom;
-        std::string temp;
         std::string tab_pom1[8];
         int line_num = 0;
 
