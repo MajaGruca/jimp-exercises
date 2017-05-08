@@ -23,7 +23,6 @@ namespace moviesubs
 
     };
 
-
     class MicroDvdSubtitles : public MovieSubtitles{
 
     public:
@@ -43,17 +42,15 @@ namespace moviesubs
     };
 
 
-    class MovieSubtitlesError : public std::runtime_error
+    class MovieSubtitlesError : public std::invalid_argument
     {
     public:
-        MovieSubtitlesError(const std::string &str ) : std::runtime_error::runtime_error(str){
+        MovieSubtitlesError(const std::string &str ) : std::invalid_argument::invalid_argument(str){
 
         }
         //int Get_line() const ;
         //void Set_line(int num) ;
         //int LineAt() const ;
-
-
     };
     class SubtitleEndBeforeStart : public MovieSubtitlesError
     {
