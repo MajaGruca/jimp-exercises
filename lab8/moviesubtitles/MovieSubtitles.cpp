@@ -73,7 +73,6 @@ namespace moviesubs {
     }
 
     void MovieSubtitles::ShiftAllSubtitlesBy(int delay, int fps, std::stringstream *in, std::stringstream *out) {
-
     }
 
     SubRipSubtitles::SubRipSubtitles() {
@@ -143,12 +142,12 @@ namespace moviesubs {
                             tab_pom1[t - j - 1] = "0" + tab_pom1[t - j - 1];
                     }
                 }
-                if(line_num!=1)
-                    *out<<"\n";
+                //f(line_num!=1)
+                //    *out<<"\n";
                 *out << std::regex_replace(linijka, std::regex("([0-9]{2}:){2}([0-9]{2},[0-9]{3})([[:space:]]-->[[:space:]])([0-9]{2}:){2}([0-9]{2},[0-9]{3})"),
                                            tab_pom1[0] + ":" + tab_pom1[1] + ":" + tab_pom1[2] + "," + tab_pom1[3] +
-                                               " --> " + tab_pom1[4] + ":" + tab_pom1[5] + ":" + tab_pom1[6] + "," +
-                                               tab_pom1[7]);// << '\n';
+                                           " --> " + tab_pom1[4] + ":" + tab_pom1[5] + ":" + tab_pom1[6] + "," +
+                                           tab_pom1[7]) << '\n';
             } else throw InvalidSubtitleLineFormat();
             //*out << "dupa";//linijka << '\n';
 
@@ -163,6 +162,8 @@ namespace moviesubs {
 
     SubtitleEndBeforeStart::SubtitleEndBeforeStart(int line_num, std::string line) : MovieSubtitlesError(
             "At line " + std::to_string(line_num) + ": " + line) {
+
+        this->line_number=line_num;
     }
 
     int SubtitleEndBeforeStart::LineAt() const {

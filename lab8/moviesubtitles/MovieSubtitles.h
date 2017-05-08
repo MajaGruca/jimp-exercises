@@ -23,7 +23,6 @@ namespace moviesubs
 
     };
 
-
     class MicroDvdSubtitles : public MovieSubtitles{
 
     public:
