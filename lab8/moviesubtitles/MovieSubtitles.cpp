@@ -30,6 +30,8 @@ namespace moviesubs {
         int tab_pom[2];
         int line_num = 0;
 
+
+
         while (pom.length() > 0) {
             std::size_t pos = pom.find("\n");
             line_num++;
@@ -85,8 +87,9 @@ namespace moviesubs {
 
     void SubRipSubtitles::ShiftAllSubtitlesBy(int delay, int fps, std::stringstream *in, std::stringstream *out) {
 
-        if(fps<=0)
+        if(fps<=0) {
             throw std::invalid_argument("Ivalid argument");
+        }
         std::string pom = in->str();
         std::smatch mm;
         std::smatch mmm;
@@ -94,6 +97,8 @@ namespace moviesubs {
         std::string linijka_pom;
         std::string tab_pom1[8];
         int line_num = 0;
+        int zmienna=0;
+        int stara_zmienna=0;
 
         while (pom.length() > 0) {
             std::size_t pos = pom.find("\n\n");
@@ -115,6 +120,13 @@ namespace moviesubs {
                     {
                         for (auto x:mm) tab_pom1[j] = x;
                     }
+                    if(j==-1)
+                    {
+                        for (auto x:mm) zmienna = stoi(x);
+                        if(zmienna-stara_zmienna!=1)
+                            throw OutOfOrderFrames();
+                        stara_zmienna=zmienna;
+                    }
                     linijka_pom = mm.suffix().str();
                 }
                 int t = 3;
@@ -134,6 +146,15 @@ namespace moviesubs {
                             }
                         }
                     }
+
+                    for(int z=0;z<4;z++)
+                    {
+                        if(stoi(tab_pom1[z])<0)
+                        {
+                            throw NegativeFrameAfterShift();
+                        }
+                    }
+
                     while (tab_pom1[t].length() != 3) {
                         tab_pom1[t] = "0" + tab_pom1[t];
                     }
@@ -141,6 +162,13 @@ namespace moviesubs {
                         if (tab_pom1[t - j - 1].length() != 2)
                             tab_pom1[t - j - 1] = "0" + tab_pom1[t - j - 1];
                     }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (tab_pom1[z] > tab_pom1[z + 4])
+                        //std::cout<<"subtitles end before strat";
+                    { throw SubtitleEndBeforeStart(line_num, linijka.substr(2, linijka.length() - 6)); }
+                    if (tab_pom1[z] < tab_pom1[z + 4])
+                        break;
                 }
                 //f(line_num!=1)
                 //    *out<<"\n";
