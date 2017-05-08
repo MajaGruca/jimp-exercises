@@ -49,21 +49,33 @@ namespace moviesubs
         MovieSubtitlesError(const std::string &str ) : std::runtime_error::runtime_error(str){
 
         }
+        //int Get_line() const ;
+        //void Set_line(int num) ;
+        //int LineAt() const ;
 
-       // MovieSubtitlesError(const std::string &__arg) : runtime_error(__arg) {};
 
+    };
+    class SubtitleEndBeforeStart : public MovieSubtitlesError
+    {
+    public:
+
+        SubtitleEndBeforeStart(int line_number,std::string line);
+        int LineAt() const ;
+
+    private:
+        int line_number;
     };
     class NegativeFrameAfterShift : public MovieSubtitlesError
     {
     public:
         NegativeFrameAfterShift();
     };
-    class SubtitleEndBeforeStart : public MovieSubtitlesError
+    class InvalidSubtitleLineFormat : public MovieSubtitlesError
     {
     public:
-        SubtitleEndBeforeStart();
-
+        InvalidSubtitleLineFormat();
     };
+
     class MissingTimeSpecification : public MovieSubtitlesError
     {
     public:
