@@ -38,16 +38,20 @@ namespace moviesubs
     public:
         SubRipSubtitles();
         virtual ~SubRipSubtitles();
+
+        virtual void ShiftAllSubtitlesBy(int delay, int fps,std::stringstream *in, std::stringstream *out);
     };
 
 
     class MovieSubtitlesError : public std::runtime_error
     {
     public:
-        MovieSubtitlesError();
-        //MovieSubtitlesError() : std::runtime_error::runtime_error(){
+        MovieSubtitlesError(const std::string &str ) : std::runtime_error::runtime_error(str){
 
-        //};
+        }
+
+       // MovieSubtitlesError(const std::string &__arg) : runtime_error(__arg) {};
+
     };
     class NegativeFrameAfterShift : public MovieSubtitlesError
     {
@@ -59,11 +63,6 @@ namespace moviesubs
     public:
         SubtitleEndBeforeStart();
 
-    };
-    class InvalidSubtitleLineFormat : public MovieSubtitlesError
-    {
-    public:
-        InvalidSubtitleLineFormat();
     };
     class MissingTimeSpecification : public MovieSubtitlesError
     {
