@@ -61,7 +61,7 @@ namespace academia
                                     const std::vector<std::reference_wrapper<const academia::Serializable>> &value) {
         *out_<<"\""<<field_name<<"\": [";
         for (auto &i: value)
-            *out_ << i << ' ';
+            //*out_ << i << ' ';
 
 
 
