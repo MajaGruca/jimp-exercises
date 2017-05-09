@@ -55,6 +55,8 @@ namespace academia
         virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override;
         virtual void Header(const std::string &object_name) override;
         virtual void Footer(const std::string &object_name) override;
+    private:
+        bool is_first=true;
 
     };
 

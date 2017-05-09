@@ -60,20 +60,16 @@ namespace academia
     void JsonSerializer::ArrayField(const std::string &field_name,
                                     const std::vector<std::reference_wrapper<const academia::Serializable>> &value) {
         *out_<<"\""<<field_name<<"\": [";
-        int flag=0;
+
         for(const Serializable &i: value)
         {
-            if(flag)
+            if(!is_first)
             {
                 *out_<<", ";
             } else
-                flag=1;
+                is_first=false;
             i.Serialize(this);
         }
-
-
-
-
         *out_<<"]";
     }
 
