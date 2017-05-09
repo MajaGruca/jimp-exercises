@@ -106,16 +106,9 @@ namespace academia
         Room(int id, std::string nr, Type classroom) : id_(id), nr_(nr), classroom_(classroom) {};
         ~Room(){}
 
-
-
-
         void Serialize(Serializer * item) const override;
 
         std::string TypeToString(Type type) const;
-
-
-
-
 
     private:
         int id_;
