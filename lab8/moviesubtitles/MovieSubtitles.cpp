@@ -74,6 +74,7 @@ namespace moviesubs {
             flag=0;
         std::smatch mm;
         std::smatch mmm;
+        int zmienna=0;
         std::regex ee("[0-9]+");
         std::string linijka_pom;
         std::string tab_pom1[8];
@@ -83,30 +84,47 @@ namespace moviesubs {
         if(fps<=0)
             throw MovieSubtitlesError("Invalid Framerate");
         while (pom.length() > 0) {
-            std::size_t pos = pom.find("\n");
+            std::size_t pos = pom.find("\n\n");
             line_num++;
             if (pos > pom.length()) {
                 pos = pom.length();
             }
-            std::string linijka = pom.substr(0, pos);
-            pom = pom.erase(0, pos + 1);
+            std::string linijka = pom.substr(0, pos+1);
+            pom = pom.erase(0, pos + 2);
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-            if (std::regex_match(linijka, std::regex("([0-9]{2}:){2}([0-9]{2},[0-9]{3})([[:space:]]-->[[:space:]])([0-9]{2}:){2}([0-9]{2},[0-9]{3})"))) {
+            if (std::regex_match(linijka, std::regex("([0-9]+\\n)([0-9]{2}:){2}([0-9]{2},[0-9]{3})([[:space:]]-->[[:space:]])([0-9]{2}:){2}([0-9]{2},[0-9]{3})((\\n.*)+[\\n]{1,2})"))) {
                 line_numb++;
                 linijka_pom = linijka;
                 double time1=0,time2=0;
-                for (int j = 0; j < 8; j++) {
+                for (int j = -1; j < 8; j++) {
                     std::regex_search(linijka_pom, mm, ee);
-                    for (auto x:mm) tab_pom1[j] = x;
+                    if(j>=0)
+                        for (auto x:mm) tab_pom1[j] = x;
+                    else
+                        for (auto x:mm) { zmienna=stoi(x);
+
+                        }
                     linijka_pom = mm.suffix().str();
                 }
+                order.push_back(zmienna);
+                for(int k=0;k<order.size()-1;k++)
+                {
+                    if(order[k]+1!=order[k+1])
+                        throw OutOfOrderFrames();
+                }
+
                 time1=stoi(tab_pom1[0])*3600+stoi(tab_pom1[1])*60+stoi(tab_pom1[2])+stoi(tab_pom1[3])*0.001;
                 time2=stoi(tab_pom1[4])*3600+stoi(tab_pom1[5])*60+stoi(tab_pom1[6])+stoi(tab_pom1[7])*0.001;
                 if (time1 + delay*0.001< 0)
                     throw NegativeFrameAfterShift();
                 if (time1 > time2)
+                {
+                    linijka.erase(0,2);
+                    linijka.erase(linijka.find("\n"),linijka.length());
                     throw SubtitleEndBeforeStart(line_numb, linijka);
+                }
+
                 int t = 3;
                 for (int a = 0; a < 2; a++) {
                     if (a == 1) t = 7;
@@ -139,22 +157,7 @@ namespace moviesubs {
                                                tab_pom1[7]) << '\n';
             } else
             {
-
-                if (std::regex_search(linijka, std::regex("([0-9]{2}:)")))
-                    throw  InvalidSubtitleLineFormat();
-                else
-                {
-                    if (std::regex_search(linijka, std::regex("([0-9])")))
-                        order.push_back(stoi(linijka));
-                }
-                for(int k=0;k<order.size()-1;k++)
-                {
-                    if(order[k]+1!=order[k+1])
-                        throw OutOfOrderFrames();
-                }
-                *out << linijka << '\n';
-                if(pom.length()==0 && flag)
-                    *out << '\n';
+                throw  InvalidSubtitleLineFormat();
             }
         }
     }
