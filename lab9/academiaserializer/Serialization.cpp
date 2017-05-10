@@ -36,49 +36,60 @@ namespace academia
     }
 
     void JsonSerializer::IntegerField(const std::string &field_name, int value) {
-        *out_<<"\""<<field_name<<"\": "<<std::to_string(value)<<", ";
+        wypisz_przecinek();
+        *out_<<"\""<<field_name<<"\": "<<std::to_string(value);
     }
 
     void JsonSerializer::DoubleField(const std::string &field_name, double value) {
-        *out_<<"\""<<field_name<<"\": "<<std::to_string(value)<<", ";
+        wypisz_przecinek();
+        *out_<<"\""<<field_name<<"\": "<<std::to_string(value);
     }
 
     void JsonSerializer::StringField(const std::string &field_name, const std::string &value) {
+        wypisz_przecinek();
         *out_<<"\""<<field_name<<"\": \""<<value<<"\"";
-        if (field_name!="type")
-            *out_<<", ";
     }
 
     void JsonSerializer::BooleanField(const std::string &field_name, bool value) {
-        *out_<<"\""<<field_name<<"\": "<<std::to_string(value)<<", ";
+        wypisz_przecinek();
+        *out_<<"\""<<field_name<<"\": "<<std::to_string(value);
     }
 
     void JsonSerializer::SerializableField(const std::string &field_name, const academia::Serializable &value) {
+        wypisz_przecinek();
         *out_<<field_name;
     }
 
     void JsonSerializer::ArrayField(const std::string &field_name,
                                     const std::vector<std::reference_wrapper<const academia::Serializable>> &value) {
+        wypisz_przecinek();
         *out_<<"\""<<field_name<<"\": [";
-
+        is_first=true;
         for(const Serializable &i: value)
         {
-            if(!is_first)
-            {
-                *out_<<", ";
-            } else
-                is_first=false;
             i.Serialize(this);
         }
         *out_<<"]";
     }
 
     void JsonSerializer::Header(const std::string &object_name) {
+        if (!is_first)
+          *out_<<", ";
+        is_first= true;
         *out_<<"{";
     }
 
     void JsonSerializer::Footer(const std::string &object_name) {
         *out_<<"}";
+    }
+
+    void JsonSerializer::wypisz_przecinek() {
+            if(!is_first)
+            {
+                *out_<<", ";
+            } else
+                is_first=false;
+
     }
 
     void XmlSerializer::IntegerField(const std::string &field_name, int value) {
