@@ -12,7 +12,6 @@ namespace academia
         item->StringField("name", nr_);
         item->ArrayField("rooms", room_);
         item->Footer("building");
-
     }
 
     void Room::Serialize(Serializer *item) const {
@@ -89,7 +88,6 @@ namespace academia
                 *out_<<", ";
             } else
                 is_first=false;
-
     }
 
     void XmlSerializer::IntegerField(const std::string &field_name, int value) {
@@ -120,7 +118,6 @@ namespace academia
         {
             i.Serialize(this);
         }
-
         *out_<<"<\\"<<field_name<<">";
     }
 
@@ -130,6 +127,5 @@ namespace academia
 
     void XmlSerializer::Footer(const std::string &object_name) {
         *out_<<"<\\"<<object_name<<">";
-
     }
 }
