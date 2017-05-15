@@ -83,7 +83,8 @@ namespace academia
                                     const std::vector<std::reference_wrapper<const academia::Serializable>> &value) {
         wypisz_przecinek();
         *out_<<"\""<<field_name<<"\": [";
-        is_first=true;
+        if(value.size()!=0)
+            is_first=true;
         for(const Serializable &i: value)
         {
             i.Serialize(this);
