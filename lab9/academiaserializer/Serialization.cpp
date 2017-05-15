@@ -6,11 +6,31 @@
 namespace academia
 {
 
+    void BuildingRepository::StoreAll(Serializer *item) const {
+        std::vector<std::reference_wrapper<const Serializable>> v(building_.begin(), building_.end());
+        item->Header("building_repository");
+        item->ArrayField("buildings", v);
+        item->Footer("building_repository");
+    }
+    std::experimental::optional<Building> BuildingRepository::operator[](int i) const
+    {
+        for(auto n: building_)
+        {
+            if(n.Id()==i)
+                return n;
+        }
+    }
+    void BuildingRepository::Add(Building a)
+    {
+        building_.emplace_back(a);
+    }
+
     void Building::Serialize(Serializer *item) const {
+        std::vector<std::reference_wrapper<const Serializable>> v(room_.begin(), room_.end());
         item->Header("building");
         item->IntegerField("id", id_);
         item->StringField("name", nr_);
-        item->ArrayField("rooms", room_);
+        item->ArrayField("rooms", v);
         item->Footer("building");
     }
 
