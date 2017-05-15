@@ -11,6 +11,7 @@
 #include <initializer_list>
 #include <sstream>
 #include <functional>
+#include <experimental/optional>
 
 namespace academia
 {
@@ -29,7 +30,7 @@ namespace academia
         virtual void StringField(const std::string &field_name, const std::string &value) =0;
         virtual void BooleanField(const std::string &field_name, bool value) =0;
         virtual void SerializableField(const std::string &field_name, const academia::Serializable &value) =0;
-        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const academia::Serializable>> &value) =0;
+        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const Serializable>> &value) =0;
         virtual void Header(const std::string &object_name) =0;
         virtual void Footer(const std::string &object_name) =0;
     protected:
@@ -39,6 +40,9 @@ namespace academia
     class Serializable{
     public:
         virtual void Serialize(Serializer* item) const =0;
+        std::vector<std::reference_wrapper<Serializable>> ref;
+    private:
+
     };
 
     class JsonSerializer : public Serializer{
@@ -52,7 +56,7 @@ namespace academia
         virtual void StringField(const std::string &field_name, const std::string &value) override;
         virtual void BooleanField(const std::string &field_name, bool value) override;
         virtual void SerializableField(const std::string &field_name, const academia::Serializable &value) override;
-        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override;
+        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const Serializable>> &value) override;
         virtual void Header(const std::string &object_name) override;
         virtual void Footer(const std::string &object_name) override;
 
@@ -74,28 +78,13 @@ namespace academia
         virtual void StringField(const std::string &field_name, const std::string &value) override;
         virtual void BooleanField(const std::string &field_name, bool value) override;
         virtual void SerializableField(const std::string &field_name, const academia::Serializable &value) override;
-        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override;
+        virtual void ArrayField(const std::string &field_name, const std::vector<std::reference_wrapper<const Serializable>> &value) override;
         virtual void Header(const std::string &object_name) override;
         virtual void Footer(const std::string &object_name) override;
 
     };
 
 
-
-    class Building:public Serializable{
-    public:
-        Building(){}
-        Building(int id, std::string nr, std::initializer_list<std::reference_wrapper<const Serializable>> room):
-                id_(id), nr_(nr), room_(room){} ;
-        virtual ~Building(){}
-
-        void Serialize(Serializer* item) const override;
-
-    private:
-        int id_;
-        std::string nr_;
-        std::vector<std::reference_wrapper<const Serializable>> room_;
-    };
 
     class Room : public Serializable {
     public:
@@ -119,6 +108,34 @@ namespace academia
         int id_;
         std::string nr_;
         Type classroom_;
+    };
+
+    class Building:public Serializable{
+    public:
+        Building(){}
+        Building(int id, std::string nr, std::initializer_list<Room> room):
+                id_(id), nr_(nr), room_(room){} ;
+        virtual ~Building(){}
+        int Id(){return id_;}
+        void Serialize(Serializer* item) const override;
+
+    private:
+        int id_;
+        std::string nr_;
+        std::vector<Room> room_;
+    };
+
+    class BuildingRepository{
+    public:
+        BuildingRepository(){}
+        BuildingRepository(std::initializer_list<Building> building): building_(building){};
+        void StoreAll(Serializer *serializer) const;
+        void Add(Building build);
+        virtual ~BuildingRepository(){}
+        std::experimental::optional<Building> operator[](int i) const;
+
+    private:
+        std::vector<Building> building_;
     };
 
 }
