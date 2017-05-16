@@ -11,58 +11,38 @@
 
 namespace algo
 {
-    class CopyInto
-    {
-    public:
-        CopyInto( std::vector<int> arg, int buffer, std::vector<int>* expected);
-    };
-    class Contains
-    {
-    public:
-        Contains(std::vector<int> arg,bool element);
-        bool operator==(const bool);
-    };
-    class InitializeWith
-    {
-    public:
-        InitializeWith(int value, std::vector<int>* arg);
-    };
-    class InitializedVectorOfLength
-    {
-    public:
-        InitializedVectorOfLength(int a, int b);
-    };
-    class MapToString
-    {
-    public:
-        MapToString(double a, double b);
-    };
-    class Keys
-    {
-    public:
-        Keys(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
 
-    };
-    class ContainsKey
-    {
-    public:
-        ContainsKey(std::map<std::string, int> arg, std::string str);
-    };
-    class Values
-    {
-    public:
-        Values(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
-    };
-    class ContainsValue
-    {
-    public:
-        ContainsValue(std::map<std::string, int> arg,int a);
-    };
-    class DivisableBy
-    {
-    public:
-        DivisableBy( std::vector<int> arg,int a);
-    };
+        void CopyInto( std::vector<int> arg, int buffer, std::vector<int>* expected);
+
+        bool Contains(std::vector<int> arg,bool element);
+
+        std::vector<int> InitializeWith(int value, std::vector<int>* arg);
+
+        std::vector<int> InitializedVectorOfLength(int a, int b);
+
+        std::vector<std::string> MapToString(const std::vector<double> &v);
+
+        std::vector<std::string> Keys(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
+
+        bool ContainsKey(std::map<std::string, int> arg, std::string str);
+
+        std::vector<int> Values(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
+
+        bool ContainsValue(std::map<std::string, int> arg,int a);
+
+        std::vector<int> DivisableBy( std::vector<int> arg,int a);
+        void SortInPlace(std::vector<int> *v);
+    std::vector<int> Sort(const std::vector<int> &v);
+    void SortByFirstInPlace(std::vector<std::pair<int,int>> *v);
+    void SortBySecondInPlace(std::vector<std::pair<int,int>> *v);
+    void SortByThirdInPlace(std::vector<std::tuple<int,int,int>> *v);
+    std::string Join(const std::string &joiner, const std::vector<double> &v);
+    int Sum(const std::vector<int> &v);
+    int Product(const std::vector<int> &v);
+    std::vector<std::string> RemoveDuplicates(const std::vector<std::string> &v);
+    void RemoveDuplicatesInPlace(std::vector<std::string> *v);
+    int HowManyShortStrings(const std::vector<std::string> &v, int inclusive_short_length);
+
 }
 
 
