@@ -27,12 +27,13 @@ namespace algo
 
         bool ContainsKey(std::map<std::string, int> arg, std::string str);
 
-    std::vector<int> Values(const std::map<std::string, int> &m);
+        std::vector<int> Values(const std::map<std::string, int> &m);
 
         bool ContainsValue(std::map<std::string, int> arg,int a);
 
         std::vector<int> DivisableBy( std::vector<int> arg,int a);
-        void SortInPlace(std::vector<int> *v);
+
+    void SortInPlace(std::vector<int> *v);
     std::vector<int> Sort(const std::vector<int> &v);
     void SortByFirstInPlace(std::vector<std::pair<int,int>> *v);
     void SortBySecondInPlace(std::vector<std::pair<int,int>> *v);
