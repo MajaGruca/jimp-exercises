@@ -57,15 +57,25 @@ namespace algo
 
     }
     bool ContainsValue(std::map<std::string, int> arg, int a) {
-       for(auto &n:arg)
-       {
-           if(n.second==a)
-               return true;
-       }
-        return false;
+
+        if(std::find_if(arg.begin(),arg.end(),[a](std::pair<std::string,int> z){ return z.second==a;})==arg.end())
+            return false;
+        else return true;
     }
 
     std::vector<int> DivisableBy(std::vector<int> arg, int a) {
         return  std::vector<int>{0};
+    }
+
+    void SortInPlace(std::vector<int> *v) {
+
+    }
+
+    std::vector<int> Sort(const std::vector<int> &v) {
+        return std::vector<int>();
+    }
+
+    void SortByFirstInPlace(std::vector<std::pair<int, int>> *v) {
+
     }
 }
