@@ -27,17 +27,22 @@ namespace algo
 
     std::vector<int> InitializeWith(int value, std::vector<int> *arg) {
 
-        std::iota(arg->begin(), arg->end(), value);
+        std::fill(arg->begin(), arg->end(), value);
+        return *arg;
     }
 
     std::vector<int> InitializedVectorOfLength(int a, int b) {
-        std::vector<int> from_vector((unsigned long) a);
-        std::iota(from_vector.begin(), from_vector.end(), b);
+        std::vector<int> vec(a);
+        std::fill(vec.begin(), vec.end(), b);
+        return vec;
     }
 
     std::vector<std::string> MapToString(const std::vector<double> &v)
     {
-
+        std::vector<std::string> vec;
+        std::transform(v.begin(), v.end(), std::back_inserter(vec),
+                       [](double a) { return std::to_string(a); });
+        return vec;
     }
 
     std::set<std::string> Keys(const std::map<std::string, int> &m)
