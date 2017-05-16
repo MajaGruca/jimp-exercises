@@ -7,6 +7,7 @@
 #include <vector>
 #include <MemLeakTest.h>
 #include <Algo.h>
+#include <w32api/dbdaoint.h>
 
 
 using algo::DivisableBy;
