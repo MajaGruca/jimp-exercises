@@ -3,6 +3,13 @@
 //
 
 #include "Algo.h"
+
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <map>
+#include <iterator>
+#include <numeric>
 namespace algo
 {
 
@@ -22,10 +29,12 @@ namespace algo
 
     InitializeWith::InitializeWith(int value, std::vector<int> *arg) {
 
+        std::iota(arg->begin(), arg->end(), value);
     }
 
     InitializedVectorOfLength::InitializedVectorOfLength(int a, int b) {
-
+        std::vector<int> from_vector((unsigned long) a);
+        std::iota(from_vector.begin(), from_vector.end(), b);
     }
 
     MapToString::MapToString(double a, double b) {
