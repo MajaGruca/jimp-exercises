@@ -8,13 +8,14 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <set>
 
 namespace algo
 {
 
         void CopyInto( std::vector<int> arg, int buffer, std::vector<int>* expected);
 
-        bool Contains(std::vector<int> arg,bool element);
+        bool Contains(std::vector<int> arg,int element);
 
         std::vector<int> InitializeWith(int value, std::vector<int>* arg);
 
@@ -22,11 +23,11 @@ namespace algo
 
         std::vector<std::string> MapToString(const std::vector<double> &v);
 
-        std::vector<std::string> Keys(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
+        std::set<std::string> Keys(const std::map<std::string, int> &m);
 
         bool ContainsKey(std::map<std::string, int> arg, std::string str);
 
-        std::vector<int> Values(std::initializer_list<std::string> a ,std::initializer_list<std::string> b);
+    std::vector<int> Values(const std::map<std::string, int> &m);
 
         bool ContainsValue(std::map<std::string, int> arg,int a);
 
