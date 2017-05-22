@@ -63,14 +63,16 @@ size_t Size() const - zwaraca rozmiar planu*/
     class Scheduler {
     public:
         Scheduler(){};
-        ~Scheduler(){};
+        virtual ~Scheduler(){};
         Schedule PrepareNewSchedule(const std::vector<int> &rooms, const std::map<int, std::vector<int>> &teacher_courses_assignment, const std::map<int, std::set<int>> &courses_of_year, int n_time_slots);
     };
 
 
-    class GreedyScheduler{
+    class GreedyScheduler : public Scheduler
+    {
+    public:
         GreedyScheduler(){};
-        ~GreedyScheduler(){};
+        virtual ~GreedyScheduler(){};
 
     };
     class NoViableSolutionFound{
