@@ -4,12 +4,10 @@
 
 #include "Scheduler.h"
 
-
 #include <vector>
 #include <algorithm>
 #include <set>
 #include <map>
-
 namespace academia
 {
 
@@ -75,6 +73,7 @@ namespace academia
     {
         Schedule schedule;
         int all_time_slots=n_time_slots;
+        std::vector<std::vector<int>> pom(n_time_slots);
         int rooms_it=0;
         bool flag= false;
         int c_id=0,t_id=0,r_id=0,t_s=0,y=0;
@@ -97,7 +96,7 @@ namespace academia
                         if(c==a)
                         {
                             y=b.first;
-
+                            pom[all_time_slots-1].push_back(y);
                             flag=true;
                             break;
                         }
@@ -111,10 +110,21 @@ namespace academia
                     throw NoViableSolutionFound();
                 else
                     flag= false;
+
                 schedule.InsertScheduleItem(SchedulingItem{c_id, t_id, r_id,all_time_slots , y});
                 all_time_slots--;
             }
         }
+        for(auto &w : pom)
+        {
+            std::sort   ( w.begin(), w.end());
+            auto p=std::unique ( w.begin(), w.end());
+            if(p!=w.end())
+            {
+                throw NoViableSolutionFound();
+            }
+        }
+
         return schedule;
     }
 }
