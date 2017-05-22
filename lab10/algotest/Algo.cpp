@@ -64,7 +64,9 @@ namespace algo
     }
 
     std::vector<int> DivisableBy(std::vector<int> arg, int a) {
-        return  std::vector<int>{0};
+        std::vector<int> v;
+        std::transform(arg.begin(),arg.end(),std::back_inserter(v),[a](int z){if(z%a==0){return z;};});
+        return v;
     }
 
     void SortInPlace(std::vector<int> *v) {
@@ -77,5 +79,24 @@ namespace algo
 
     void SortByFirstInPlace(std::vector<std::pair<int, int>> *v) {
 
+    }
+
+    void SortBySecondInPlace(std::vector<std::pair<int, int>> *v) {
+
+    }
+
+    void SortByThirdInPlace(std::vector<std::tuple<int, int, int>> *v) {
+
+    }
+
+    std::string Join(const std::string &joiner, const std::vector<double> &v) {
+        return std::string();
+    }
+
+    int Sum(const std::vector<int> &v) {
+        std::vector<int> a;
+        int suma;
+        std::transform(v.begin(),v.end(),std::back_inserter(a),[suma](int z){return suma=suma+z;});
+        return suma;
     }
 }
