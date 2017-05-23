@@ -7,4 +7,7 @@ namespace factoryMethod
 {
 
 
+    std::string MyType::SayHello() {
+        return "hello";
+    }
 }
