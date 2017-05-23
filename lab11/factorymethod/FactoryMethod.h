@@ -6,9 +6,16 @@
 #define JIMP_EXERCISES_FACTORYMETHOD_H
 
 
-class FactoryMethod {
+namespace factoryMethod
+{
+    class FactoryMethod {
 
-};
+    };
+
+
+}
+
+
 
 
 #endif //JIMP_EXERCISES_FACTORYMETHOD_H

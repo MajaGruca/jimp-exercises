@@ -3,3 +3,8 @@
 //
 
 #include "FactoryMethod.h"
+namespace factoryMethod
+{
+
+
+}
