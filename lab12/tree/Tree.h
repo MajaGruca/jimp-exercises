@@ -36,6 +36,10 @@ namespace tree{
                 }
             };
             size_t Size(){ return size_;};
+            Element* PreOrder(Tree<Element> one);
+
+
+
 
         private:
 
@@ -102,6 +106,13 @@ namespace tree{
     bool Tree<Element>::operator<(Tree one) {
         return this->value_<one.value_;
     }
+
+    template <class Element>
+    Element *Tree<Element>::PreOrder(Tree<Element> one) {
+        return nullptr;
+    }
+
+
 }
 
 
