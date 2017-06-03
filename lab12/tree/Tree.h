@@ -12,12 +12,17 @@
 #include <vector>
 
 namespace tree{
+
+    template<typename Element>
+    class InOrderTreeIterator;
+
+
     template <class Element>
     class Tree {
         public:
 
-            Tree(const Element &cos):size_(1),value_(cos){}
-            Tree():size_(1){}
+            Tree(const Element &cos):size_(1),value_(cos),root_(this){}
+            Tree():size_(1),root_(this){}
 
             bool operator<(Element one);
             bool operator<(Tree one);
@@ -39,9 +44,12 @@ namespace tree{
             size_t Size(){ return size_;};
             std::unique_ptr<Tree> L(){ return L_dziecko ;}
             std::unique_ptr<Tree> P(){ return P_dziecko ;}
+            Tree* Root(){ return root_;}
+            operator Element(){ return value_;}
 
         private:
 
+            Tree* root_;
             size_t size_;
             Element value_;
 
@@ -105,13 +113,6 @@ namespace tree{
     bool Tree<Element>::operator<(Tree one) {
         return this->value_<one.value_;
     }
-
-    template <class Element>
-    auto PreOrderTreeIterator()
-    {
-        //std::vector<Tree<Element>>
-    };
-
 
 }
 
