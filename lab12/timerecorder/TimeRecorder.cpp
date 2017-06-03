@@ -3,7 +3,6 @@
 //
 
 #include "TimeRecorder.h"
-namespace profiling
-{
+namespace profiling {
 
 }
