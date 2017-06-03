@@ -9,6 +9,7 @@
 #include <initializer_list>
 #include <algorithm>
 #include <memory>
+#include <vector>
 
 namespace tree{
     template <class Element>
@@ -36,10 +37,8 @@ namespace tree{
                 }
             };
             size_t Size(){ return size_;};
-            Element* PreOrder(Tree<Element> one);
-
-
-
+            std::unique_ptr<Tree> L(){ return L_dziecko ;}
+            std::unique_ptr<Tree> P(){ return P_dziecko ;}
 
         private:
 
@@ -108,9 +107,10 @@ namespace tree{
     }
 
     template <class Element>
-    Element *Tree<Element>::PreOrder(Tree<Element> one) {
-        return nullptr;
-    }
+    auto PreOrderTreeIterator()
+    {
+        //std::vector<Tree<Element>>
+    };
 
 
 }

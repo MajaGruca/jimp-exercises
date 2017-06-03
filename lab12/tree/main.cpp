@@ -13,9 +13,9 @@ int main()
    int a=9;
 
     std::cout << "PreOrder: ";
-    for(const int &value_in_tree : PreOrder(tree)) {
+    /**for(const int &value_in_tree : PreOrder(tree)) {
         std::cout<<value_in_tree << " ";
-    }
+    }*/
    /* std::cout << "InOrder: ";
     for(const int &value_in_tree : InOrder(tree)) {
         std::cout<<value_in_tree << " ";
