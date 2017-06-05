@@ -7,10 +7,23 @@
 
 #include <Tree.h>
 #include <vector>
+#include <iostream>
 namespace tree
 {
 
-
+    template <class Element>
+    void InOrderVector(std::vector<Element> &v_,Tree<Element>* tree)
+    {
+        //if(tree->L()!= nullptr){std::cout<<"cos";}
+        /*{
+            InOrderVector(v_,tree->L()->Root());
+        }*/
+        v_.emplace_back(tree->Value());
+        /*if(tree->P())
+        {
+            InOrderVector(v_,tree->P()->Root());
+        }*/
+    }
     template<class Element>
     class InOrderTreeView;
 
@@ -22,19 +35,7 @@ namespace tree
         return InOrderTreeView<Element>(tree);
     }
 
-    template <class Element>
-    void InOrderVector(std::vector<Element> &v_,Tree<Element>* tree)
-    {
-        if(tree->L())
-        {
-            InOrderVector(v_,tree->L().get());
-        }
-        v_.emplace_back(tree->Value());
-        if(tree->P())
-        {
-            InOrderVector(v_,tree->P().get());
-        }
-    }
+
     template <class Element>
     class InOrderTreeIterator
     {
