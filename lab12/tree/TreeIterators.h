@@ -10,20 +10,18 @@
 #include <iostream>
 namespace tree
 {
-
-    template <class Element>
-    void InOrderVector(std::vector<Element> &v_,Tree<Element>* tree)
-    {
-        //if(tree->L()!= nullptr){std::cout<<"cos";}
-        /*{
-            InOrderVector(v_,tree->L()->Root());
-        }*/
-        v_.emplace_back(tree->Value());
-        /*if(tree->P())
-        {
-            InOrderVector(v_,tree->P()->Root());
-        }*/
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    template<class Element>
+    void SetVectorInOrder(Tree<Element> *tree, std::vector<Tree<Element> *> &vec_in_or) {
+        if (tree->L()) {
+            SetVectorInOrder(tree->L(), vec_in_or);
+        }
+        vec_in_or.push_back(tree);
+        if (tree->P()) {
+            SetVectorInOrder(tree->P(), vec_in_or);
+        }
     }
+
     template<class Element>
     class InOrderTreeView;
 
@@ -36,46 +34,38 @@ namespace tree
     }
 
 
-    template <class Element>
-    class InOrderTreeIterator
-    {
+    template<class Element>
+    class InOrderTreeIterator {
     public:
-        InOrderTreeIterator(){}
-        InOrderTreeIterator(Tree<Element>* tree) : v_(std::vector<Element>()){
-            InOrderVector<Element>(v_,tree);
-            iter=v_.begin();
-        }
-        InOrderTreeIterator &operator++(){ ++iter; return *this;}
-        Element operator*(){ return *iter;}
-        bool operator !=(const InOrderTreeIterator & one) const { return iter!=one.iter;}
-
+        InOrderTreeIterator(Tree<Element> *tree) : iter_(0) {SetVectorInOrder<Element>(tree, vec_in_or);}
+        InOrderTreeIterator<Element> &operator++() {++iter_; return *this;}
+        Element operator*(){return vec_in_or[iter_]->Value();}
+        bool operator!=(const InOrderTreeIterator<Element> &one) const{return iter_ != one.iter_;}
         friend class InOrderTreeView<Element>;
 
     private:
-        void SetToEnd(void){iter = v_.end();};
-        std::vector<Element> v_;
-        typename std::vector<Element>::iterator iter;
-
+        void SetToEnd(){iter_ = vec_in_or.size();}
+        std::vector<Tree<Element> *> vec_in_or;
+        unsigned long iter_;
     };
 
-
-    template <class Element>
-    class InOrderTreeView
-    {
+    template<class Element>
+    class InOrderTreeView {
     public:
-        InOrderTreeView(Tree<int>* cos):tree_(cos){}
-        InOrderTreeIterator<Element> begin(){ return tree_->Root();}
+        InOrderTreeView(Tree<Element> *tree) : tree_(tree) {};
+        InOrderTreeIterator<Element> begin(){
+            InOrderTreeIterator<Element> new_iterator(tree_->Root());
+            return new_iterator;
+        }
         InOrderTreeIterator<Element> end(){
-            InOrderTreeIterator<Element> new_iterator(this->tree_->Root());
+            InOrderTreeIterator<Element> new_iterator(tree_->Root());
             new_iterator.SetToEnd();
             return new_iterator;
-
         }
 
     private:
         Tree<Element> *tree_;
     };
-
 
 }
 
