@@ -11,6 +11,8 @@
 #include <memory>
 #include <vector>
 
+#include <iostream>
+
 namespace tree{
 
     template<typename Element>
@@ -60,10 +62,13 @@ namespace tree{
     template <class Element>
     bool Tree<Element>::Find(const Element &e) {
 
-        if(this->value_==e)
+        std::cout<<value_<<std::endl;
+        if(this->value_==e) {
+            std::cout<<"wtf";
             return true;
+        }
 
-        if(this->value_<e)
+        if(this->value_>e)
         {
             if(this->L_dziecko)
                 this->L_dziecko->Find(e);
