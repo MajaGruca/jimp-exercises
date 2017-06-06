@@ -42,8 +42,8 @@ namespace tree{
                 }
             };
             size_t Size(){ return size_;};
-            std::unique_ptr<Tree> L(){ return L_dziecko.get() ;}
-            std::unique_ptr<Tree> P(){ return P_dziecko.get() ;}
+            Tree* L(){ return L_dziecko.get() ;}
+            Tree* P(){ return P_dziecko.get() ;}
             Tree* Root(){ return root_;}
             operator Element(){ return value_;}
 
