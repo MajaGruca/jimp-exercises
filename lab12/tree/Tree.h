@@ -62,9 +62,8 @@ namespace tree{
     template <class Element>
     bool Tree<Element>::Find(const Element &e) {
 
-        std::cout<<value_<<std::endl;
+
         if(this->value_==e) {
-            std::cout<<"wtf";
             return true;
         }
 
