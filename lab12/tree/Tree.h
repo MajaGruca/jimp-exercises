@@ -87,21 +87,21 @@ namespace tree{
 
         if(this->value_<e)
         {
-            if(!this->L_dziecko) {
-
-                this->L_dziecko = std::make_unique<Tree<Element>>(e);
-
-            } else
-            {this->L_dziecko->Insert(e);}
-
-        } else
-        {
             if(!this->P_dziecko) {
 
                 this->P_dziecko = std::make_unique<Tree<Element>>(e);
+
+            } else
+            {this->P_dziecko->Insert(e);}
+
+        } else
+        {
+            if(!this->L_dziecko) {
+
+                this->L_dziecko = std::make_unique<Tree<Element>>(e);
             }
             else
-            {this->P_dziecko->Insert(e);}
+            {this->L_dziecko->Insert(e);}
         }
     }
     template <class Element>
