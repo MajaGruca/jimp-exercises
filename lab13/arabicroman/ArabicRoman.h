@@ -7,8 +7,8 @@
 
 #include <string>
 
-
 int RomanToArabic(std::string a);
 std::string ArabicToRoman(int a);
+
 
 #endif //JIMP_EXERCISES_ARABICROMAN_H

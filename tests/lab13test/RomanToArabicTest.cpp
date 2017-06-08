@@ -24,3 +24,7 @@ TEST(roman_to_arabic_test, roman_to_arabic_of_M_is_1000) {
 TEST(roman_to_arabic_test, roman_to_arabic_of_XCIX_is_99) {
     EXPECT_EQ(99, RomanToArabic("XCIX"));
 }
+
+TEST(roman_to_arabic_test, roman_to_arabic_of_XCIX_is_88) {
+    EXPECT_EQ(88, RomanToArabic("LXXXVIII"));
+}
