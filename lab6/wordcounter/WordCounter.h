@@ -25,6 +25,8 @@ namespace datastructures
         WordCounter(std::initializer_list<Word> s);
 
 
+        WordCounter FromInputStream(std::istream *input);
+
         int operator[](std::string a);
 
 
