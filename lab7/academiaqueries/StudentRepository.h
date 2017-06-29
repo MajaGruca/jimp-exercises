@@ -1,0 +1,14 @@
+//
+// Created by ktr on 11.04.2017.
+//
+
+#ifndef JIMP_EXERCISES_STUDENTREPOSITORY_H
+#define JIMP_EXERCISES_STUDENTREPOSITORY_H
+
+
+class StudentRepository {
+
+};
+
+
+#endif //JIMP_EXERCISES_STUDENTREPOSITORY_H
